@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+    <title>Facelet Title</title>
+    <h:outputStylesheet name="css/jsfcrud.css"/>
+</h:head>
+<h:body>
+    Hello from Facelets
+    <br />
+    <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
+    <br />
+    <h:link outcome="/clientes/persona/List" value="Show All Persona Items"/>
+    <br />
+    <h:link outcome="/clientes/tipoIdentificacion/List" value="Show All TipoIdentificacion Items"/>
+    <br />
+    <h:link outcome="/clientes/tipoPersona/List" value="Show All TipoPersona Items"/>
+                <br />
+    <h:link outcome="/seguridades/usuario/List" value="Show All Usuario Items"/>
+</h:body>
+
+
+
+
+</html>
+
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Inicio</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <link href="css/index.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <center>
+            <div id="Cabecera">
+                <p:graphicImage value="/recursos/imagenes/logo-ieps.png"  style="border: transparent" />
+            </div>
+        </center>
+        <p:growl id="mensajes" showDetail="true" life="2000" />
+        <div>
+            <center>
+                <h:form>
+                    <p:panel header="Bienvenido" style="width: 500px;
+                             height: 310px;
+                             background-image: url(../recursos/imagenes/fondo.jpg);
+                             background-size: cover;">
+                        <p:spacer height="80" />
+                        <h:panelGrid columns="2" cellpadding="5">
+
+                            <h:outputLabel for="username" value="Usuario:" style="color: #ffffff;"/>
+                            <p:inputText  id="username"
+                                         required="false" label="username" />
+                            <h:outputLabel for="password" value="Clave:" style="color: #ffffff;"/>
+                            <p:password  id="password" required="false"
+                                        label="password" />
+
+                        </h:panelGrid>
+                        <p:commandButton id="loginButton" value="Ingresar"
+                                         actionListener="#{usuarioController.validaAcceso()}" update=":mensajes" 
+                                         style="width: 150px; font-size:2.0em;
+                                         height: 35px;"/>
+                    </p:panel>
+                </h:form>
+            </center>
+        </div>
+        <br />
+
+        <br />
+    </h:body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

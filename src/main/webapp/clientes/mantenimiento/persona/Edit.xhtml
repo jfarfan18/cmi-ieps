@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonaEditDlg" widgetVar="PersonaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{propiedadesEtiquetas.EditPersonaTitle}">
+            <h:form id="PersonaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personaController.selected != null}">
+                        <p:outputLabel value="#{propiedadesEtiquetas.EditPersonaLabel_codigoTipoIdentificacion}" for="codigoTipoIdentificacion" />
+                        <p:selectOneMenu id="codigoTipoIdentificacion" value="#{personaController.selected.codigoTipoIdentificacion}" required="true" requiredMessage="#{propiedadesEtiquetas.EditPersonaRequiredMessage_codigoTipoIdentificacion}">
+                            <f:selectItem itemLabel="#{propiedadesEtiquetas.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipoIdentificacionController.itemsAvailableSelectOne}"
+                                           var="codigoTipoIdentificacionItem"
+                                           itemLabel="#{codigoTipoIdentificacionItem.nombre}"
+                                           itemValue="#{codigoTipoIdentificacionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{propiedadesEtiquetas.EditPersonaLabel_codigoTipoPersona}" for="codigoTipoPersona" />
+                        <p:selectOneMenu id="codigoTipoPersona" value="#{personaController.selected.codigoTipoPersona}" required="true" requiredMessage="#{propiedadesEtiquetas.EditPersonaRequiredMessage_codigoTipoPersona}">
+                            <f:selectItem itemLabel="#{propiedadesEtiquetas.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipoPersonaController.itemsAvailableSelectOne}"
+                                           var="codigoTipoPersonaItem"
+                                           itemLabel="#{codigoTipoPersonaItem.nombre}"
+                                           itemValue="#{codigoTipoPersonaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{propiedadesEtiquetas.EditPersonaLabel_codigo}" for="codigo" />
+                        <p:inputText id="codigo" readonly="true" value="#{personaController.selected.codigo}" title="#{propiedadesEtiquetas.EditPersonaTitle_codigo}" required="true" requiredMessage="#{propiedadesEtiquetas.EditPersonaRequiredMessage_codigo}"/>
+                        <p:outputLabel value="#{propiedadesEtiquetas.EditPersonaLabel_identificacion}" for="identificacion" />
+                        <p:inputText id="identificacion" value="#{personaController.selected.identificacion}" title="#{propiedadesEtiquetas.EditPersonaTitle_identificacion}" required="true" requiredMessage="#{propiedadesEtiquetas.EditPersonaRequiredMessage_identificacion}"/>
+                        <p:outputLabel value="#{propiedadesEtiquetas.EditPersonaLabel_nombreCompleto}" for="nombreCompleto" />
+                        <p:inputText id="nombreCompleto" value="#{personaController.selected.nombreCompleto}" title="#{propiedadesEtiquetas.EditPersonaTitle_nombreCompleto}" />
+                        <p:outputLabel value="#{propiedadesEtiquetas.EditPersonaLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{personaController.selected.direccion}" title="#{propiedadesEtiquetas.EditPersonaTitle_direccion}" />
+                        <p:outputLabel value="#{propiedadesEtiquetas.EditPersonaLabel_referencia}" for="referencia" />
+                        <p:inputText id="referencia" value="#{personaController.selected.referencia}" title="#{propiedadesEtiquetas.EditPersonaTitle_referencia}" />
+                        <p:outputLabel value="#{propiedadesEtiquetas.EditPersonaLabel_correo}" for="correo" />
+                        <p:inputText id="correo" value="#{personaController.selected.correo}" title="#{propiedadesEtiquetas.EditPersonaTitle_correo}" />
+                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{personaController.update}" value="#{propiedadesEtiquetas.Save}" update="display,:PersonaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PersonaEditDialog');"/>
+                    <p:commandButton value="#{propiedadesEtiquetas.Cancel}" onclick="PersonaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

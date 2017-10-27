@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SocioCursoCreateDlg" widgetVar="SocioCursoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSocioCursoTitle}">
+            <h:form id="SocioCursoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{socioCursoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateSocioCursoLabel_codigo}" for="codigo" />
+                        <p:inputText id="codigo" value="#{socioCursoController.selected.codigo}" title="#{bundle.CreateSocioCursoTitle_codigo}" required="true" requiredMessage="#{bundle.CreateSocioCursoRequiredMessage_codigo}"/>
+                        <p:outputLabel value="#{bundle.CreateSocioCursoLabel_calificacion}" for="calificacion" />
+                        <p:inputText id="calificacion" value="#{socioCursoController.selected.calificacion}" title="#{bundle.CreateSocioCursoTitle_calificacion}" />
+                        <p:outputLabel value="#{bundle.CreateSocioCursoLabel_fechaInicio}" for="fechaInicio" />
+                        <p:calendar id="fechaInicio" pattern="MM/dd/yyyy" value="#{socioCursoController.selected.fechaInicio}" title="#{bundle.EditSocioCursoTitle_fechaInicio}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateSocioCursoLabel_fechaFin}" for="fechaFin" />
+                        <p:calendar id="fechaFin" pattern="MM/dd/yyyy" value="#{socioCursoController.selected.fechaFin}" title="#{bundle.EditSocioCursoTitle_fechaFin}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateSocioCursoLabel_cursoCodigo}" for="cursoCodigo" />
+                        <p:selectOneMenu id="cursoCodigo" value="#{socioCursoController.selected.cursoCodigo}" required="true" requiredMessage="#{bundle.EditSocioCursoRequiredMessage_cursoCodigo}">
+                            <f:selectItems value="#{cursoController.itemsAvailableSelectOne}"
+                                           var="cursoCodigoItem"
+                                           itemValue="#{cursoCodigoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateSocioCursoLabel_socioCodigo}" for="socioCodigo" />
+                        <p:selectOneMenu id="socioCodigo" value="#{socioCursoController.selected.socioCodigo}" required="true" requiredMessage="#{bundle.EditSocioCursoRequiredMessage_socioCodigo}">
+                            <f:selectItems value="#{socioController.itemsAvailableSelectOne}"
+                                           var="socioCodigoItem"
+                                           itemValue="#{socioCodigoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{socioCursoController.create}" value="#{bundle.Save}" update="display,:SocioCursoListForm:datalist,:growl" oncomplete="handleSubmit(args,'SocioCursoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SocioCursoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipoIdentificacionEditDlg" widgetVar="TipoIdentificacionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{propiedadesEtiquetas.EditTipoIdentificacionTitle}">
+            <h:form id="TipoIdentificacionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tipoIdentificacionController.selected != null}">
+                        <p:outputLabel value="#{propiedadesEtiquetas.EditTipoIdentificacionLabel_codigo}" for="codigo" />
+                        <p:inputText id="codigo" readonly="true" value="#{tipoIdentificacionController.selected.codigo}" title="#{propiedadesEtiquetas.EditTipoIdentificacionTitle_codigo}" required="true" requiredMessage="#{propiedadesEtiquetas.EditTipoIdentificacionRequiredMessage_codigo}"/>
+                        <p:outputLabel value="#{propiedadesEtiquetas.EditTipoIdentificacionLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{tipoIdentificacionController.selected.nombre}" title="#{propiedadesEtiquetas.EditTipoIdentificacionTitle_nombre}" />
+                        <p:outputLabel value="#{propiedadesEtiquetas.EditTipoIdentificacionLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{tipoIdentificacionController.selected.descripcion}" title="#{propiedadesEtiquetas.EditTipoIdentificacionTitle_descripcion}" />
+                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tipoIdentificacionController.update}" value="#{propiedadesEtiquetas.Save}" update="display,:TipoIdentificacionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TipoIdentificacionEditDialog');"/>
+                    <p:commandButton value="#{propiedadesEtiquetas.Cancel}" onclick="TipoIdentificacionEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

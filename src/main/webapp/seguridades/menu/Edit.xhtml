@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MenuEditDlg" widgetVar="MenuEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{propiedadesEtiquetas.EditMenuTitle}">
+            <h:form id="MenuEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{menuController.selected != null}">
+                        <p:outputLabel value="#{propiedadesEtiquetas.EditMenuLabel_codigo}" for="codigo" />
+                        <p:inputText id="codigo" value="#{menuController.selected.codigo}" title="#{propiedadesEtiquetas.EditMenuTitle_codigo}" required="true" requiredMessage="#{propiedadesEtiquetas.EditMenuRequiredMessage_codigo}"/>
+                        <p:outputLabel value="#{propiedadesEtiquetas.EditMenuLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{menuController.selected.nombre}" title="#{propiedadesEtiquetas.EditMenuTitle_nombre}" />
+                        <p:outputLabel value="#{propiedadesEtiquetas.EditMenuLabel_aplicacion}" for="aplicacion" />
+                        <p:inputText id="aplicacion" value="#{menuController.selected.aplicacion}" title="#{propiedadesEtiquetas.EditMenuTitle_aplicacion}" />
+                        <p:outputLabel value="#{propiedadesEtiquetas.EditMenuLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{menuController.selected.descripcion}" title="#{propiedadesEtiquetas.EditMenuTitle_descripcion}" />
+                        <p:outputLabel value="#{propiedadesEtiquetas.EditMenuLabel_orden}" for="orden" />
+                        <p:inputText id="orden" value="#{menuController.selected.orden}" title="#{propiedadesEtiquetas.EditMenuTitle_orden}" />
+                        <p:outputLabel value="#{propiedadesEtiquetas.EditMenuLabel_eliminado}" for="eliminado" />
+                        <p:inputText id="eliminado" value="#{menuController.selected.eliminado}" title="#{propiedadesEtiquetas.EditMenuTitle_eliminado}" />
+                        <p:outputLabel value="#{propiedadesEtiquetas.EditMenuLabel_icono}" for="icono" />
+                        <p:inputText id="icono" value="#{menuController.selected.icono}" title="#{propiedadesEtiquetas.EditMenuTitle_icono}" />
+                        <p:outputLabel value="#{propiedadesEtiquetas.EditMenuLabel_tipo}" for="tipo" />
+                        <p:inputText id="tipo" value="#{menuController.selected.tipo}" title="#{propiedadesEtiquetas.EditMenuTitle_tipo}" />
+                        <p:outputLabel value="#{propiedadesEtiquetas.EditMenuLabel_codigoPadre}" for="codigoPadre" />
+                        <p:selectOneMenu id="codigoPadre" value="#{menuController.selected.codigoPadre}" >
+                            <f:selectItem itemLabel="#{propiedadesEtiquetas.SelectOneMessage}"/>
+                            <f:selectItems value="#{menuController.itemsAvailableSelectOne}"
+                                           var="codigoPadreItem"
+                                           itemValue="#{codigoPadreItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{menuController.update}" value="#{propiedadesEtiquetas.Save}" update="display,:MenuListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MenuEditDialog');"/>
+                    <p:commandButton value="#{propiedadesEtiquetas.Cancel}" onclick="MenuEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

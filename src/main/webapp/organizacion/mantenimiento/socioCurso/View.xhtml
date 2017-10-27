@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SocioCursoViewDlg" widgetVar="SocioCursoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewSocioCursoTitle}">
+            <h:form id="SocioCursoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{socioCursoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewSocioCursoLabel_codigo}"/>
+                        <h:outputText value="#{socioCursoController.selected.codigo}" title="#{bundle.ViewSocioCursoTitle_codigo}"/>
+                        <h:outputText value="#{bundle.ViewSocioCursoLabel_calificacion}"/>
+                        <h:outputText value="#{socioCursoController.selected.calificacion}" title="#{bundle.ViewSocioCursoTitle_calificacion}"/>
+                        <h:outputText value="#{bundle.ViewSocioCursoLabel_fechaInicio}"/>
+                        <h:outputText value="#{socioCursoController.selected.fechaInicio}" title="#{bundle.ViewSocioCursoTitle_fechaInicio}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewSocioCursoLabel_fechaFin}"/>
+                        <h:outputText value="#{socioCursoController.selected.fechaFin}" title="#{bundle.ViewSocioCursoTitle_fechaFin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewSocioCursoLabel_cursoCodigo}"/>
+                        <h:outputText value="#{socioCursoController.selected.cursoCodigo}" title="#{bundle.ViewSocioCursoTitle_cursoCodigo}"/>
+                        <h:outputText value="#{bundle.ViewSocioCursoLabel_socioCodigo}"/>
+                        <h:outputText value="#{socioCursoController.selected.socioCodigo}" title="#{bundle.ViewSocioCursoTitle_socioCodigo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="SocioCursoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

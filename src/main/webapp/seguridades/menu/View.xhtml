@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MenuViewDlg" widgetVar="MenuViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{propiedadesEtiquetas.ViewMenuTitle}">
+            <h:form id="MenuViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{menuController.selected != null}">
+                        <h:outputText value="#{propiedadesEtiquetas.ViewMenuLabel_codigo}"/>
+                        <h:outputText value="#{menuController.selected.codigo}" title="#{propiedadesEtiquetas.ViewMenuTitle_codigo}"/>
+                        <h:outputText value="#{propiedadesEtiquetas.ViewMenuLabel_nombre}"/>
+                        <h:outputText value="#{menuController.selected.nombre}" title="#{propiedadesEtiquetas.ViewMenuTitle_nombre}"/>
+                        <h:outputText value="#{propiedadesEtiquetas.ViewMenuLabel_aplicacion}"/>
+                        <h:outputText value="#{menuController.selected.aplicacion}" title="#{propiedadesEtiquetas.ViewMenuTitle_aplicacion}"/>
+                        <h:outputText value="#{propiedadesEtiquetas.ViewMenuLabel_descripcion}"/>
+                        <h:outputText value="#{menuController.selected.descripcion}" title="#{propiedadesEtiquetas.ViewMenuTitle_descripcion}"/>
+                        <h:outputText value="#{propiedadesEtiquetas.ViewMenuLabel_orden}"/>
+                        <h:outputText value="#{menuController.selected.orden}" title="#{propiedadesEtiquetas.ViewMenuTitle_orden}"/>
+                        <h:outputText value="#{propiedadesEtiquetas.ViewMenuLabel_eliminado}"/>
+                        <h:outputText value="#{menuController.selected.eliminado}" title="#{propiedadesEtiquetas.ViewMenuTitle_eliminado}"/>
+                        <h:outputText value="#{propiedadesEtiquetas.ViewMenuLabel_icono}"/>
+                        <h:outputText value="#{menuController.selected.icono}" title="#{propiedadesEtiquetas.ViewMenuTitle_icono}"/>
+                        <h:outputText value="#{propiedadesEtiquetas.ViewMenuLabel_tipo}"/>
+                        <h:outputText value="#{menuController.selected.tipo}" title="#{propiedadesEtiquetas.ViewMenuTitle_tipo}"/>
+                        <h:outputText value="#{propiedadesEtiquetas.ViewMenuLabel_codigoPadre}"/>
+                        <h:outputText value="#{menuController.selected.codigoPadre}" title="#{propiedadesEtiquetas.ViewMenuTitle_codigoPadre}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{propiedadesEtiquetas.Close}" onclick="MenuViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

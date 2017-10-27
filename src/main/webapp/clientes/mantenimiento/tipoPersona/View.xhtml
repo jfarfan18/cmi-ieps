@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipoPersonaViewDlg" widgetVar="TipoPersonaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{propiedadesEtiquetas.ViewTipoPersonaTitle}">
+            <h:form id="TipoPersonaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tipoPersonaController.selected != null}">
+                        <h:outputText value="#{propiedadesEtiquetas.ViewTipoPersonaLabel_codigo}"/>
+                        <h:outputText value="#{tipoPersonaController.selected.codigo}" title="#{propiedadesEtiquetas.ViewTipoPersonaTitle_codigo}"/>
+                        <h:outputText value="#{propiedadesEtiquetas.ViewTipoPersonaLabel_nombre}"/>
+                        <h:outputText value="#{tipoPersonaController.selected.nombre}" title="#{propiedadesEtiquetas.ViewTipoPersonaTitle_nombre}"/>
+                        <h:outputText value="#{propiedadesEtiquetas.ViewTipoPersonaLabel_descripcion}"/>
+                        <h:outputText value="#{tipoPersonaController.selected.descripcion}" title="#{propiedadesEtiquetas.ViewTipoPersonaTitle_descripcion}"/>
+                        <h:outputText value="#{propiedadesEtiquetas.ViewTipoPersonaLabel_eliminado}"/>
+                        <h:outputText value="#{tipoPersonaController.selected.eliminado}" title="#{propiedadesEtiquetas.ViewTipoPersonaTitle_eliminado}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{propiedadesEtiquetas.Close}" onclick="TipoPersonaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

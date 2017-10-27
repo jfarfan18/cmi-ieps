@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonaNaturalViewDlg" widgetVar="PersonaNaturalViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle1.ViewPersonaNaturalTitle}">
+            <h:form id="PersonaNaturalViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personaNaturalController.selected != null}">
+                        <h:outputText value="#{bundle1.ViewPersonaNaturalLabel_fechaNacimiento}"/>
+                        <h:outputText value="#{personaNaturalController.selected.fechaNacimiento}" title="#{bundle1.ViewPersonaNaturalTitle_fechaNacimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle1.ViewPersonaNaturalLabel_primerNombre}"/>
+                        <h:outputText value="#{personaNaturalController.selected.primerNombre}" title="#{bundle1.ViewPersonaNaturalTitle_primerNombre}"/>
+                        <h:outputText value="#{bundle1.ViewPersonaNaturalLabel_segundoNombre}"/>
+                        <h:outputText value="#{personaNaturalController.selected.segundoNombre}" title="#{bundle1.ViewPersonaNaturalTitle_segundoNombre}"/>
+                        <h:outputText value="#{bundle1.ViewPersonaNaturalLabel_primerApellido}"/>
+                        <h:outputText value="#{personaNaturalController.selected.primerApellido}" title="#{bundle1.ViewPersonaNaturalTitle_primerApellido}"/>
+                        <h:outputText value="#{bundle1.ViewPersonaNaturalLabel_segundoApellido}"/>
+                        <h:outputText value="#{personaNaturalController.selected.segundoApellido}" title="#{bundle1.ViewPersonaNaturalTitle_segundoApellido}"/>
+                        <h:outputText value="#{bundle1.ViewPersonaNaturalLabel_sexo}"/>
+                        <h:outputText value="#{personaNaturalController.selected.sexo}" title="#{bundle1.ViewPersonaNaturalTitle_sexo}"/>
+                        <h:outputText value="#{bundle1.ViewPersonaNaturalLabel_codigoPersona}"/>
+                        <h:outputText value="#{personaNaturalController.selected.codigoPersona}" title="#{bundle1.ViewPersonaNaturalTitle_codigoPersona}"/>
+                        <h:outputText value="#{bundle1.ViewPersonaNaturalLabel_codigoEstadoCivil}"/>
+                        <h:outputText value="#{personaNaturalController.selected.codigoEstadoCivil}" title="#{bundle1.ViewPersonaNaturalTitle_codigoEstadoCivil}"/>
+                        <h:outputText value="#{bundle1.ViewPersonaNaturalLabel_persona}"/>
+                        <h:outputText value="#{personaNaturalController.selected.persona}" title="#{bundle1.ViewPersonaNaturalTitle_persona}"/>
+                        <h:outputText value="#{bundle1.ViewPersonaNaturalLabel_codigoRaza}"/>
+                        <h:outputText value="#{personaNaturalController.selected.codigoRaza}" title="#{bundle1.ViewPersonaNaturalTitle_codigoRaza}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle1.Close}" onclick="PersonaNaturalViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ActaViewDlg" widgetVar="ActaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewActaTitle}">
+            <h:form id="ActaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{actaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewActaLabel_codigo}"/>
+                        <h:outputText value="#{actaController.selected.codigo}" title="#{bundle.ViewActaTitle_codigo}"/>
+                        <h:outputText value="#{bundle.ViewActaLabel_fechaReunion}"/>
+                        <h:outputText value="#{actaController.selected.fechaReunion}" title="#{bundle.ViewActaTitle_fechaReunion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewActaLabel_fechaActa}"/>
+                        <h:outputText value="#{actaController.selected.fechaActa}" title="#{bundle.ViewActaTitle_fechaActa}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewActaLabel_descripcion}"/>
+                        <h:outputText value="#{actaController.selected.descripcion}" title="#{bundle.ViewActaTitle_descripcion}"/>
+                        <h:outputText value="#{bundle.ViewActaLabel_numeroActa}"/>
+                        <h:outputText value="#{actaController.selected.numeroActa}" title="#{bundle.ViewActaTitle_numeroActa}"/>
+                        <h:outputText value="#{bundle.ViewActaLabel_direccion}"/>
+                        <h:outputText value="#{actaController.selected.direccion}" title="#{bundle.ViewActaTitle_direccion}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ActaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

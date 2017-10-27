@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SocioEditDlg" widgetVar="SocioEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditSocioTitle}">
+            <h:form id="SocioEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{socioController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditSocioLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{socioController.selected.estado}" title="#{bundle.EditSocioTitle_estado}" />
+                        <p:outputLabel value="#{bundle.EditSocioLabel_fechaIngreso}" for="fechaIngreso" />
+                        <p:calendar id="fechaIngreso" pattern="MM/dd/yyyy" value="#{socioController.selected.fechaIngreso}" title="#{bundle.EditSocioTitle_fechaIngreso}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditSocioLabel_codigo}" for="codigo" />
+                        <p:inputText id="codigo" value="#{socioController.selected.codigo}" title="#{bundle.EditSocioTitle_codigo}" required="true" requiredMessage="#{bundle.EditSocioRequiredMessage_codigo}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{socioController.update}" value="#{bundle.Save}" update="display,:SocioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SocioEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SocioEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

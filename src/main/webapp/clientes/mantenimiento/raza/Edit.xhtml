@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RazaEditDlg" widgetVar="RazaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle1.EditRazaTitle}">
+            <h:form id="RazaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{razaController.selected != null}">
+                        <p:outputLabel value="#{bundle1.EditRazaLabel_codigo}" for="codigo" />
+                        <p:inputText id="codigo" value="#{razaController.selected.codigo}" title="#{bundle1.EditRazaTitle_codigo}" required="true" requiredMessage="#{bundle1.EditRazaRequiredMessage_codigo}"/>
+                        <p:outputLabel value="#{bundle1.EditRazaLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{razaController.selected.nombre}" title="#{bundle1.EditRazaTitle_nombre}" />
+                        <p:outputLabel value="#{bundle1.EditRazaLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{razaController.selected.descripcion}" title="#{bundle1.EditRazaTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle1.EditRazaLabel_eliminado}" for="eliminado" />
+                        <p:inputText id="eliminado" value="#{razaController.selected.eliminado}" title="#{bundle1.EditRazaTitle_eliminado}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{razaController.update}" value="#{bundle1.Save}" update="display,:RazaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RazaEditDialog');"/>
+                    <p:commandButton value="#{bundle1.Cancel}" onclick="RazaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

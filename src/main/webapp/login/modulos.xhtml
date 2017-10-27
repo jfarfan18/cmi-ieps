@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Inicio</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <link href="css/index.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <center>
+            <div id="Cabecera">
+                <p:graphicImage value="/recursos/imagenes/logo-ieps.png"  height="75px" style="border: transparent" />
+            </div>
+        </center>
+        <p:growl id="mensajes" showDetail="true" life="2000" />
+        <div>
+            <center>
+                <h:form>
+            <p:panel id="panelPrincipal" style="text-align: center " >  
+                <p:messages id="mensaje" showDetail="true" autoUpdate="true" closable="true" /> 
+                
+                    <h:panelGrid columns="5" width="100%">
+                        <f:facet name="header">
+                            <h:outputLabel value="#{propiedadesEtiquetaBL.SeleccioneModulo}"
+                                           styleClass="encabezadosPanelGrid"/>
+                        </f:facet>
+                        
+                        <p:dataGrid id="datalist" 
+                                        value="#{menuController.modulos}" 
+                                        var="item" 
+                                        columns="3"  
+                                        rows="6" paginator="true"  
+                                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                        style=" width: 60%"
+                                        >      
+
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{propiedadesEtiquetaBL.Modulos}"/>
+                                </f:facet>
+                                <p:panel style="text-align:center">  
+                                    <h:panelGrid columns="1" style="width:100%">  
+
+                                        <h:commandLink action="#{menuController.irMenu()}" >  
+
+                                            <p:graphicImage value="#{item.icono}" height="150px" style="border: transparent" />
+                                            <f:setPropertyActionListener target="#{menuController.modulo}" value="#{item}" />
+
+                                        </h:commandLink>   
+
+                                        <h:outputText value="#{item.nombre}" style="font-weight: bolder;" />
+
+                                    </h:panelGrid>  
+                                </p:panel>  
+
+                            </p:dataGrid>
+                    </h:panelGrid>
+                
+            </p:panel>
+                    </h:form>
+            </center>
+        </div>
+        <br />
+
+        <br />
+    </h:body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

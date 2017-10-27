@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ActaEditDlg" widgetVar="ActaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditActaTitle}">
+            <h:form id="ActaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{actaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditActaLabel_codigo}" for="codigo" />
+                        <p:inputText id="codigo" value="#{actaController.selected.codigo}" title="#{bundle.EditActaTitle_codigo}" required="true" requiredMessage="#{bundle.EditActaRequiredMessage_codigo}"/>
+                        <p:outputLabel value="#{bundle.EditActaLabel_fechaReunion}" for="fechaReunion" />
+                        <p:calendar id="fechaReunion" pattern="MM/dd/yyyy" value="#{actaController.selected.fechaReunion}" title="#{bundle.EditActaTitle_fechaReunion}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditActaLabel_fechaActa}" for="fechaActa" />
+                        <p:calendar id="fechaActa" pattern="MM/dd/yyyy" value="#{actaController.selected.fechaActa}" title="#{bundle.EditActaTitle_fechaActa}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditActaLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{actaController.selected.descripcion}" title="#{bundle.EditActaTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.EditActaLabel_numeroActa}" for="numeroActa" />
+                        <p:inputText id="numeroActa" value="#{actaController.selected.numeroActa}" title="#{bundle.EditActaTitle_numeroActa}" />
+                        <p:outputLabel value="#{bundle.EditActaLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{actaController.selected.direccion}" title="#{bundle.EditActaTitle_direccion}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{actaController.update}" value="#{bundle.Save}" update="display,:ActaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ActaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ActaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

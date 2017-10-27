@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CursoViewDlg" widgetVar="CursoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCursoTitle}">
+            <h:form id="CursoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cursoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCursoLabel_codigo}"/>
+                        <h:outputText value="#{cursoController.selected.codigo}" title="#{bundle.ViewCursoTitle_codigo}"/>
+                        <h:outputText value="#{bundle.ViewCursoLabel_nombre}"/>
+                        <h:outputText value="#{cursoController.selected.nombre}" title="#{bundle.ViewCursoTitle_nombre}"/>
+                        <h:outputText value="#{bundle.ViewCursoLabel_descripcion}"/>
+                        <h:outputText value="#{cursoController.selected.descripcion}" title="#{bundle.ViewCursoTitle_descripcion}"/>
+                        <h:outputText value="#{bundle.ViewCursoLabel_horas}"/>
+                        <h:outputText value="#{cursoController.selected.horas}" title="#{bundle.ViewCursoTitle_horas}"/>
+                        <h:outputText value="#{bundle.ViewCursoLabel_direccion}"/>
+                        <h:outputText value="#{cursoController.selected.direccion}" title="#{bundle.ViewCursoTitle_direccion}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CursoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

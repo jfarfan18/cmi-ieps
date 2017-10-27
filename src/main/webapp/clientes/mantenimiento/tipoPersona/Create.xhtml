@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipoPersonaCreateDlg" widgetVar="TipoPersonaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{propiedadesEtiquetas.CreateTipoPersonaTitle}">
+            <h:form id="TipoPersonaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tipoPersonaController.selected != null}">
+                        <p:outputLabel value="#{propiedadesEtiquetas.CreateTipoPersonaLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{tipoPersonaController.selected.nombre}" title="#{propiedadesEtiquetas.CreateTipoPersonaTitle_nombre}" />
+                        <p:outputLabel value="#{propiedadesEtiquetas.CreateTipoPersonaLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{tipoPersonaController.selected.descripcion}" title="#{propiedadesEtiquetas.CreateTipoPersonaTitle_descripcion}" />
+                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tipoPersonaController.create}" value="#{propiedadesEtiquetas.Save}" update="display,:TipoPersonaListForm:datalist,:growl" oncomplete="handleSubmit(args,'TipoPersonaCreateDialog');"/>
+                    <p:commandButton value="#{propiedadesEtiquetas.Cancel}" onclick="TipoPersonaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

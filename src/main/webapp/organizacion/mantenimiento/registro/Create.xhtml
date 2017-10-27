@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RegistroCreateDlg" widgetVar="RegistroCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateRegistroTitle}">
+            <h:form id="RegistroCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{registroController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateRegistroLabel_codigo}" for="codigo" />
+                        <p:inputText id="codigo" value="#{registroController.selected.codigo}" title="#{bundle.CreateRegistroTitle_codigo}" required="true" requiredMessage="#{bundle.CreateRegistroRequiredMessage_codigo}"/>
+                        <p:outputLabel value="#{bundle.CreateRegistroLabel_entrada}" for="entrada" />
+                        <p:calendar id="entrada" pattern="MM/dd/yyyy HH:mm:ss" value="#{registroController.selected.entrada}" title="#{bundle.EditRegistroTitle_entrada}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateRegistroLabel_salida}" for="salida" />
+                        <p:calendar id="salida" pattern="MM/dd/yyyy HH:mm:ss" value="#{registroController.selected.salida}" title="#{bundle.EditRegistroTitle_salida}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateRegistroLabel_observaciones}" for="observaciones" />
+                        <p:inputText id="observaciones" value="#{registroController.selected.observaciones}" title="#{bundle.CreateRegistroTitle_observaciones}" />
+                        <p:outputLabel value="#{bundle.CreateRegistroLabel_codigoSocio}" for="codigoSocio" />
+                        <p:selectOneMenu id="codigoSocio" value="#{registroController.selected.codigoSocio}" required="true" requiredMessage="#{bundle.EditRegistroRequiredMessage_codigoSocio}">
+                            <f:selectItems value="#{socioController.itemsAvailableSelectOne}"
+                                           var="codigoSocioItem"
+                                           itemValue="#{codigoSocioItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{registroController.create}" value="#{bundle.Save}" update="display,:RegistroListForm:datalist,:growl" oncomplete="handleSubmit(args,'RegistroCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="RegistroCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

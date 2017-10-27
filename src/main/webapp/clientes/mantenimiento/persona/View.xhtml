@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonaViewDlg" widgetVar="PersonaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{propiedadesEtiquetas.ViewPersonaTitle}">
+            <h:form id="PersonaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personaController.selected != null}">
+                        <h:outputText value="#{propiedadesEtiquetas.ViewPersonaLabel_codigo}"/>
+                        <h:outputText value="#{personaController.selected.codigo}" title="#{propiedadesEtiquetas.ViewPersonaTitle_codigo}"/>
+                        <h:outputText value="#{propiedadesEtiquetas.ViewPersonaLabel_identificacion}"/>
+                        <h:outputText value="#{personaController.selected.identificacion}" title="#{propiedadesEtiquetas.ViewPersonaTitle_identificacion}"/>
+                        <h:outputText value="#{propiedadesEtiquetas.ViewPersonaLabel_nombreCompleto}"/>
+                        <h:outputText value="#{personaController.selected.nombreCompleto}" title="#{propiedadesEtiquetas.ViewPersonaTitle_nombreCompleto}"/>
+                        <h:outputText value="#{propiedadesEtiquetas.ViewPersonaLabel_fechaActualizacion}"/>
+                        <h:outputText value="#{personaController.selected.fechaActualizacion}" title="#{propiedadesEtiquetas.ViewPersonaTitle_fechaActualizacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{propiedadesEtiquetas.ViewPersonaLabel_direccion}"/>
+                        <h:outputText value="#{personaController.selected.direccion}" title="#{propiedadesEtiquetas.ViewPersonaTitle_direccion}"/>
+                        <h:outputText value="#{propiedadesEtiquetas.ViewPersonaLabel_referencia}"/>
+                        <h:outputText value="#{personaController.selected.referencia}" title="#{propiedadesEtiquetas.ViewPersonaTitle_referencia}"/>
+                        <h:outputText value="#{propiedadesEtiquetas.ViewPersonaLabel_correo}"/>
+                        <h:outputText value="#{personaController.selected.correo}" title="#{propiedadesEtiquetas.ViewPersonaTitle_correo}"/>
+                        <h:outputText value="#{propiedadesEtiquetas.ViewPersonaLabel_codigoTipoIdentificacion}"/>
+                        <h:outputText value="#{personaController.selected.codigoTipoIdentificacion}" title="#{propiedadesEtiquetas.ViewPersonaTitle_codigoTipoIdentificacion}"/>
+                        <h:outputText value="#{propiedadesEtiquetas.ViewPersonaLabel_codigoTipoPersona}"/>
+                        <h:outputText value="#{personaController.selected.codigoTipoPersona}" title="#{propiedadesEtiquetas.ViewPersonaTitle_codigoTipoPersona}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{propiedadesEtiquetas.Close}" onclick="PersonaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

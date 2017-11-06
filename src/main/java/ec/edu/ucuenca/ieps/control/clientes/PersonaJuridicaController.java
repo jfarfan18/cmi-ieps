@@ -50,7 +50,7 @@ public class PersonaJuridicaController implements Serializable {
     private String identificacionRepresentante;
     private Persona representante;
     private List<RepresentanteLegal> representantes;
-    private Persona representanteSeleccionado;
+    private RepresentanteLegal representanteSeleccionado;
 
     public PersonaJuridicaController() {
     }
@@ -75,13 +75,9 @@ public class PersonaJuridicaController implements Serializable {
     }
 
     public void quitarRepresentante() {
-        System.out.println("Entra");
         this.representantes.remove(this.representanteSeleccionado);
     }
 
-    public void prueba(){
-        System.out.println("aquiii");
-    }
     protected void setEmbeddableKeys() {
     }
 
@@ -156,10 +152,17 @@ public class PersonaJuridicaController implements Serializable {
         for (RepresentanteLegal actual : todos) {
             boolean existe = false;
             for (RepresentanteLegal r : representantes) {
-                if (actual.getCodigoPersonaRepresentante().getCodigo().intValue() == r.getCodigoPersonaRepresentante().getCodigo().intValue() && actual.getEliminado().equals("S")) {
+                System.out.println(actual.getCodigoPersonaRepresentante().getCodigo().intValue());
+                System.out.println(r.getCodigoPersonaRepresentante().getCodigo().intValue());
+                System.out.println(actual.getCodigoPersonaRepresentante().getCodigo().intValue() == r.getCodigoPersonaRepresentante().getCodigo().intValue());
+                System.out.println( actual.getEliminado());
+                if (actual.getCodigoPersonaRepresentante().getCodigo().intValue() == r.getCodigoPersonaRepresentante().getCodigo().intValue()) {
+                    if (actual.getEliminado().equals("S")){
                     actual.setEliminado("N");
                     actual.setFechaActualizacion(new Date());
+                    System.out.println("Actualiza 1");
                     this.ejbFacadeRepresentanteLegal.edit(actual);
+                    }                    
                     existe = true;
                     break;
                 }
@@ -167,6 +170,7 @@ public class PersonaJuridicaController implements Serializable {
             if (!existe) {
                 actual.setEliminado("S");
                 actual.setFechaActualizacion(new Date());
+                System.out.println("Actualiza 2");
                 this.ejbFacadeRepresentanteLegal.edit(actual);
             }
         }
@@ -182,10 +186,11 @@ public class PersonaJuridicaController implements Serializable {
             if (!existe) {
                 r.setEliminado("N");
                 r.setCodigoPersonaJuridico(selected);
+                System.out.println("Crea");
                 this.ejbFacadeRepresentanteLegal.create(r);
             }
         }
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle1").getString("PersonaJuridicaUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/propiedadesEtiquetas").getString("Datosguardados"));
     }
 
     public void destroy() {
@@ -288,14 +293,14 @@ public class PersonaJuridicaController implements Serializable {
     /**
      * @return the representanteSeleccionado
      */
-    public Persona getRepresentanteSeleccionado() {
+    public RepresentanteLegal getRepresentanteSeleccionado() {
         return representanteSeleccionado;
     }
 
     /**
      * @param representanteSeleccionado the representanteSeleccionado to set
      */
-    public void setRepresentanteSeleccionado(Persona representanteSeleccionado) {
+    public void setRepresentanteSeleccionado(RepresentanteLegal representanteSeleccionado) {
         this.representanteSeleccionado = representanteSeleccionado;
     }
 

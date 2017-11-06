@@ -8,9 +8,9 @@
 
     <ui:composition>
 
-        <p:dialog id="PersonaJuridicaEditDlg" widgetVar="PersonaJuridicaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle1.EditPersonaJuridicaTitle}">
+        <p:dialog id="PersonaJuridicaEditDlg" widgetVar="PersonaJuridicaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{propiedadesEtiquetas.EditarPersonaJuridica}">
             <h:form id="PersonaJuridicaEditForm">
-                <p:growl id="mensaje" showDetail="true" sticky="true" /> 
+                <p:growl id="mensaje" showDetail="true" sticky="true" autoUpdate="true" life="3000"/> 
                 <h:panelGroup id="display">
                     <p:wizard flowListener="#{personaController.onFlowProcess}" style="width: 500px;">
 
@@ -45,9 +45,9 @@
                             </h:panelGrid>
                         </p:tab>
                         <p:tab id="representante" title="Representante Legal">
-                            <h:panelGrid columns="4" rendered="#{personaJuridicaController.selected != null}">
+                            <h:panelGrid id="RepresentanteGrid" columns="4" rendered="#{personaJuridicaController.selected != null}">
                                 <p:outputLabel value="#{propiedadesEtiquetas.CreatePersonaLabel_identificacion}" for="identificacion" />
-                                <p:inputText id="identificacionRepresentante" value="#{personaJuridicaController.identificacionRepresentante}" title="#{propiedadesEtiquetas.CreatePersonaTitle_identificacion}" required="true" requiredMessage="#{propiedadesEtiquetas.CreatePersonaRequiredMessage_identificacion}">
+                                <p:inputText id="identificacionRepresentante" value="#{personaJuridicaController.identificacionRepresentante}" title="#{propiedadesEtiquetas.CreatePersonaTitle_identificacion}">
                                     <p:ajax event="blur" listener="#{personaJuridicaController.buscaReprenentante()}" 
                                             update="nombreRepresentante"></p:ajax>
                                 </p:inputText>
@@ -55,7 +55,7 @@
                                 <p:commandButton actionListener="#{personaJuridicaController.agregaRepresentante}" 
                                                  value="#{propiedadesEtiquetas.Agregar}" 
                                                  icon="ui-icon-plus"
-                                                 update="identificacionRepresentante,nombreRepresentante,tblRepresentantes,mensaje" />
+                                                 update="identificacionRepresentante,nombreRepresentante,tblRepresentantes,mensaje,RepresentanteGrid" />
                             </h:panelGrid>
                             <p:dataTable id="tblRepresentantes" 
                                          rowKey="#{representante.codigoPersonaRepresentante.codigo}"
@@ -73,10 +73,10 @@
 
                             </p:dataTable>
                             <p:contextMenu for="tblRepresentantes">
-                                <p:menuitem value="#{propiedadesEtiquetas.Quitar}" update="tblRepresentantes" icon="ui-icon-close" action="#{personaJuridicaController.quitarRepresentante}"/>
+                                <p:menuitem value="#{propiedadesEtiquetas.Quitar}" update="tblRepresentantes,RepresentanteGrid" icon="ui-icon-close" actionListener="#{personaJuridicaController.quitarRepresentante()}"/>
                             </p:contextMenu>
-                            <p:commandButton actionListener="#{personaJuridicaController.update}" value="#{bundle1.Save}" update="display,:PersonaJuridicaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PersonaJuridicaEditDialog');"/>
-                            <p:commandButton value="#{bundle1.Cancel}" onclick="PersonaJuridicaEditDialog.hide()"/>
+                            <p:commandButton actionListener="#{personaJuridicaController.update}" value="#{propiedadesEtiquetas.Save}" update="display,:PersonaJuridicaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PersonaJuridicaEditDialog');"/>
+                            <p:commandButton value="#{propiedadesEtiquetas.Cancel}" onclick="PersonaJuridicaEditDialog.hide()"/>
                         </p:tab>
 
                     </p:wizard>

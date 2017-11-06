@@ -75,7 +75,7 @@
                             <p:contextMenu for="tblRepresentantes">
                                 <p:menuitem value="#{propiedadesEtiquetas.Quitar}" update="tblRepresentantes" icon="ui-icon-close" actionListener="#{personaJuridicaController.quitarRepresentante}"/>
                             </p:contextMenu>
-                            <p:commandButton actionListener="#{personaJuridicaController.create}" value="#{propiedadesEtiquetas.Save}" update="display,:PersonaJuridicaListForm:datalist,:growl" oncomplete="handleSubmit(args,'PersonaJuridicaCreateDialog');"/>
+                            <p:commandButton actionListener="#{propiedadesEtiquetas.propiedadesEtiquetas}" value="#{propiedadesEtiquetas.Save}" update="display,:PersonaJuridicaListForm:datalist,:growl" oncomplete="handleSubmit(args,'PersonaJuridicaCreateDialog');"/>
                             <p:commandButton value="#{propiedadesEtiquetas.Cancel}" onclick="PersonaJuridicaCreateDialog.hide()"/>
                         </p:tab>
 

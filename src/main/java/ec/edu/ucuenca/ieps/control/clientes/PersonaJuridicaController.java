@@ -28,6 +28,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.event.FlowEvent;
 
 @Named("personaJuridicaController")
 @SessionScoped
@@ -92,6 +93,10 @@ public class PersonaJuridicaController implements Serializable {
     private PersonaJuridicaFacade getFacade() {
         return ejbFacade;
     }
+    
+    public String onFlowProcess(FlowEvent event) {
+            return event.getNewStep();
+    }
 
     public PersonaJuridica prepareCreate() {
         selected = new PersonaJuridica();
@@ -108,8 +113,7 @@ public class PersonaJuridicaController implements Serializable {
         if (selected != null) {
             this.identificacionRepresentante = "";
             this.representantes = ejbFacadeRepresentanteLegal.buscarPorPersonaJuridicaEliminado(selected.getCodigoPersona(), "N");
-            System.out.println(selected.getCodigoPersona());
-            System.out.println(representantes.size());
+            
 
         }
         return selected;

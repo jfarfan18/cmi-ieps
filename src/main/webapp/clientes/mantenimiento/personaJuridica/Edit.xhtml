@@ -12,7 +12,7 @@
             <h:form id="PersonaJuridicaEditForm">
                 <p:growl id="mensaje" showDetail="true" sticky="true" autoUpdate="true" life="3000"/> 
                 <h:panelGroup id="display">
-                    <p:wizard flowListener="#{personaController.onFlowProcess}" style="width: 500px;">
+                    <p:wizard flowListener="#{personaJuridicaController.onFlowProcess}" style="width: 500px;" backLabel="#{propiedadesEtiquetas.Atras}" nextLabel="#{propiedadesEtiquetas.Siguiente}">
 
                         <p:tab id="basico" title="Datos Basicos">
                             <h:panelGrid columns="2" rendered="#{personaJuridicaController.selected != null}">

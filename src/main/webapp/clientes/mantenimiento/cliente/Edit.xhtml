@@ -8,24 +8,133 @@
 
     <ui:composition>
 
-        <p:dialog id="ClienteEditDlg" widgetVar="ClienteEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{propiedadesEtiquetas.EditClienteTitle}">
+        <p:dialog id="ClienteEditDlg" widgetVar="ClienteEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{propiedadesEtiquetas.EditarCliente}">
             <h:form id="ClienteEditForm">
+                <p:growl id="mensaje" showDetail="true" sticky="true" autoUpdate="true"/>
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{clienteController.selected != null}">
-                        <p:outputLabel value="#{propiedadesEtiquetas.EditClienteLabel_fechaIngreso}" for="fechaIngreso" />
-                        <p:calendar id="fechaIngreso" pattern="MM/dd/yyyy" value="#{clienteController.selected.fechaIngreso}" title="#{propiedadesEtiquetas.EditClienteTitle_fechaIngreso}" required="true" requiredMessage="#{propiedadesEtiquetas.EditClienteRequiredMessage_fechaIngreso}" showOn="button"/>
-                        <p:outputLabel value="#{propiedadesEtiquetas.EditClienteLabel_fechaActualizacion}" for="fechaActualizacion" />
-                        <p:calendar id="fechaActualizacion" pattern="MM/dd/yyyy" value="#{clienteController.selected.fechaActualizacion}" title="#{propiedadesEtiquetas.EditClienteTitle_fechaActualizacion}"  showOn="button"/>
-                        <p:outputLabel value="#{propiedadesEtiquetas.EditClienteLabel_codigoPersona}" for="codigoPersona" />
-                        <p:selectOneMenu id="codigoPersona" value="#{clienteController.selected.codigoPersona}" required="true" requiredMessage="#{propiedadesEtiquetas.EditClienteRequiredMessage_codigoPersona}">
-                            <f:selectItem itemLabel="#{propiedadesEtiquetas.SelectOneMessage}"/>
-                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
-                                           var="codigoPersonaItem"
-                                           itemValue="#{codigoPersonaItem}"/>
-                        </p:selectOneMenu>
-                    </p:panelGrid>
-                    <p:commandButton actionListener="#{clienteController.update}" value="#{propiedadesEtiquetas.Save}" update="display,:ClienteListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ClienteEditDialog');"/>
+                    <p:wizard flowListener="#{clienteController.onFlowProcess}"  backLabel="#{propiedadesEtiquetas.Atras}" nextLabel="#{propiedadesEtiquetas.Siguiente}">
+
+                        <p:tab id="basico" title="Datos Basicos">
+                            <p:panelGrid columns="2" rendered="#{clienteController.personaNatural != null}">
+                                
+                                 <p:outputLabel value="#{propiedadesEtiquetas.CreatePersonaLabel_codigoTipoPersona}" for="tipoPersona" />
+                                <p:selectOneMenu id="tipoPersona" 
+                                                 value="#{clienteController.persona.codigoTipoPersona}" 
+                                                 required="true" 
+                                                 requiredMessage="#{propiedadesEtiquetas.EditPersonaRequiredMessage_codigoTipoPersona}">
+                                    <f:selectItems value="#{tipoPersonaController.itemsAvailableSelectOne}"
+                                                   var="codigoTipoPersonaItem"
+                                                   itemLabel="#{codigoTipoPersonaItem.nombre}"
+                                                   itemValue="#{codigoTipoPersonaItem}"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel value="#{propiedadesEtiquetas.CreatePersonaLabel_codigoTipoIdentificacion}" for="tipoIdentificacion" />
+                                <p:selectOneMenu id="tipoIdentificacion" 
+                                                 value="#{clienteController.persona.codigoTipoIdentificacion}" 
+                                                 required="true" 
+                                                 requiredMessage="#{propiedadesEtiquetas.EditPersonaRequiredMessage_codigoTipoIdentificacion}">
+                                    <f:selectItems value="#{tipoIdentificacionController.itemsAvailableSelectOne}"
+                                                   var="codigoTipoIdentificacionItem"
+                                                   itemLabel="#{codigoTipoIdentificacionItem.nombre}"
+                                                   itemValue="#{codigoTipoIdentificacionItem}"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel value="#{propiedadesEtiquetas.CreatePersonaLabel_identificacion}" for="identificacion" />
+                                <p:inputText id="identificacion" value="#{clienteController.persona.identificacion}" title="#{propiedadesEtiquetas.CreatePersonaTitle_identificacion}" required="true" requiredMessage="#{propiedadesEtiquetas.CreatePersonaRequiredMessage_identificacion}">
+                                    <p:ajax event="blur" listener="#{clienteController.buscaPersona()}" 
+                                            update="tipoIdentificacion,direccion,referencia,correo"></p:ajax>
+                                </p:inputText>
+                                <p:outputLabel value="#{propiedadesEtiquetas.CreatePersonaLabel_direccion}" for="direccion" />
+                                <p:inputText id="direccion" value="#{clienteController.persona.direccion}" title="#{propiedadesEtiquetas.CreatePersonaTitle_direccion}" />
+                                <p:outputLabel value="#{propiedadesEtiquetas.CreatePersonaLabel_referencia}" for="referencia" />
+                                <p:inputText id="referencia" value="#{clienteController.persona.referencia}" title="#{propiedadesEtiquetas.CreatePersonaTitle_referencia}" />
+                                <p:outputLabel value="#{propiedadesEtiquetas.CreatePersonaLabel_correo}" for="correo" />
+                                <p:inputText id="correo" value="#{clienteController.persona.correo}" title="#{propiedadesEtiquetas.CreatePersonaTitle_correo}" />
+
+                            </p:panelGrid>
+                        </p:tab>
+                        <p:tab id="personaNatural" title="Persona Natural">
+                            
+                            <p:panelGrid columns="2" rendered="#{clienteController.personaNatural != null}">
+                            <p:outputLabel value="#{propiedadesEtiquetas.FechaNacimiento}:" for="fechaNacimiento" />
+                            <p:calendar id="fechaNacimiento" pattern="MM/dd/yyyy" value="#{clienteController.personaNatural.fechaNacimiento}" title="#{propiedadesEtiquetas.EditClienteTitle_fechaNacimiento}"  showOn="button"/>
+                        
+                            <p:outputLabel value="#{propiedadesEtiquetas.PrimerNombre}:" for="primerNombre" />
+                            <p:inputText id="primerNombre" value="#{clienteController.personaNatural.primerNombre}" 
+                                         title="#{propiedadesEtiquetas.PrimerNombre}" required="true" requiredMessage="#{propiedadesEtiquetas.CreateClienteRequiredMessage_primerNombre}"/>
+                            <p:outputLabel value="#{propiedadesEtiquetas.SegundoNombre}:" for="segundoNombre" />
+                            <p:inputText id="segundoNombre" value="#{clienteController.personaNatural.segundoNombre}" 
+                                         title="#{propiedadesEtiquetas.SegundoNombre}" />
+                            <p:outputLabel value="#{propiedadesEtiquetas.PrimerApellido}:" for="primerApellido" />
+                            <p:inputText id="primerApellido" value="#{clienteController.personaNatural.primerApellido}" 
+                                         title="#{propiedadesEtiquetas.PrimerApellido}" required="true" requiredMessage="#{propiedadesEtiquetas.CreateClienteRequiredMessage_primerApellido}"/>
+                            <p:outputLabel value="#{propiedadesEtiquetas.SegundoApellido}:" for="segundoApellido" />
+                            <p:inputText id="segundoApellido" value="#{clienteController.personaNatural.segundoApellido}" 
+                                         title="#{propiedadesEtiquetas.SegundoApellido}" />
+                            <p:outputLabel value="#{propiedadesEtiquetas.Genero}:" for="sexo" />
+                            <p:selectOneMenu id="sexo" 
+                                             value="#{clienteController.personaNatural.sexo}" 
+                                             required="true" 
+                                             requiredMessage="#{propiedadesEtiquetas.EstadoCivil} #{propiedadesEtiquetas.EsRequerido}">
+                                <f:selectItem itemLabel="MASCULINO" itemValue="M"></f:selectItem>
+                                <f:selectItem itemLabel="FEMENINO" itemValue="F"></f:selectItem>
+                            </p:selectOneMenu>                         
+                           <p:outputLabel value="#{propiedadesEtiquetas.EstadoCivil}:" for="codigoEstadoCivil" />
+                            <p:selectOneMenu id="codigoEstadoCivil" 
+                                             value="#{clienteController.personaNatural.codigoEstadoCivil}" 
+                                             required="true" 
+                                             requiredMessage="#{propiedadesEtiquetas.EstadoCivil} #{propiedadesEtiquetas.EsRequerido}">
+                                <f:selectItems value="#{estadoCivilController.itemsAvailableSelectOne}"
+                                               var="estadoCivilItem"
+                                               itemLabel="#{estadoCivilItem.nombre}"
+                                               itemValue="#{estadoCivilItem}"/>
+                            </p:selectOneMenu>                            
+                            <p:outputLabel value="#{propiedadesEtiquetas.Raza}:" for="codigoRaza" />
+                            <p:selectOneMenu id="codigoRaza" value="#{clienteController.personaNatural.codigoRaza}" 
+                                             requiredMessage="#{propiedadesEtiquetas.Raza}">
+                                <f:selectItems value="#{razaController.itemsAvailableSelectOne}"
+                                               var="razaItem"
+                                               itemLabel="#{razaItem.nombre}"
+                                               itemValue="#{razaItem}" />
+                            </p:selectOneMenu>
+                            </p:panelGrid>
+                            <p:commandButton actionListener="#{clienteController.create}" value="#{propiedadesEtiquetas.Save}" update="display,:ClienteListForm:datalist,:growl" oncomplete="handleSubmit(args,'ClienteCreateDialog');"/>
+                            <p:commandButton value="#{propiedadesEtiquetas.Cancel}" onclick="ClienteCreateDialog.hide()"/>
+                        </p:tab>
+                       <p:tab id="representante" title="Persona Juridica">
+                            <h:panelGrid columns="4" rendered="#{clienteController.selected != null}">
+                                <p:outputLabel value="#{propiedadesEtiquetas.CreatePersonaLabel_identificacion}" for="identificacion" />
+                                <p:inputText id="identificacionRepresentante" value="#{clienteController.identificacionRepresentante}" title="#{propiedadesEtiquetas.CreatePersonaTitle_identificacion}" required="true" requiredMessage="#{propiedadesEtiquetas.CreatePersonaRequiredMessage_identificacion}">
+                                    <p:ajax event="blur" listener="#{clienteController.buscaReprenentante()}" 
+                                            update="nombreRepresentante"></p:ajax>
+                                </p:inputText>
+                                <p:outputLabel value="#{clienteController.representante.nombreCompleto}" id="nombreRepresentante" />
+                                <p:commandButton actionListener="#{clienteController.agregaRepresentante}" 
+                                                 value="#{propiedadesEtiquetas.Agregar}" 
+                                                 icon="ui-icon-plus"
+                                                 update="identificacionRepresentante,nombreRepresentante,tblRepresentantes,mensaje" />
+                            </h:panelGrid>
+                            <p:dataTable id="tblRepresentantes" 
+                                         rowKey="#{representante.codigoPersonaRepresentante.codigo}"
+                                         selection="#{clienteController.representanteSeleccionado}"
+                                         selectionMode="single"
+                                         style="width: 500px"
+                                         var="representante" 
+                                         value="#{clienteController.representantes}">
+                                <p:column headerText="#{propiedadesEtiquetas.Identificacion}">
+                                    <h:outputText value="#{representante.codigoPersonaRepresentante.identificacion}" />
+                                </p:column>
+                                <p:column headerText="#{propiedadesEtiquetas.Nombre}">
+                                    <h:outputText value="#{representante.codigoPersonaRepresentante.nombreCompleto}" />
+                                </p:column>
+
+                            </p:dataTable>
+                            <p:contextMenu for="tblRepresentantes">
+                                <p:menuitem value="#{propiedadesEtiquetas.Quitar}" update="tblRepresentantes" icon="ui-icon-close" actionListener="#{clienteController.quitarRepresentante}"/>
+                            </p:contextMenu>
+                            <p:commandButton actionListener="#{clienteController.update}" value="#{propiedadesEtiquetas.Save}" update="display,:ClienteListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ClienteEditDialog');"/>
                     <p:commandButton value="#{propiedadesEtiquetas.Cancel}" onclick="ClienteEditDialog.hide()"/>
+                        </p:tab>
+                    </p:wizard>
+                    
                 </h:panelGroup>
             </h:form>
         </p:dialog>

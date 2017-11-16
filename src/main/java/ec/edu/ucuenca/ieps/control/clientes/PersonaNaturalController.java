@@ -1,5 +1,6 @@
 package ec.edu.ucuenca.ieps.control.clientes;
 
+import com.google.gson.Gson;
 import ec.edu.ucuenca.ieps.modelado.clientes.PersonaNatural;
 import ec.edu.ucuenca.ieps.control.clientes.util.JsfUtil;
 import ec.edu.ucuenca.ieps.control.clientes.util.JsfUtil.PersistAction;
@@ -10,6 +11,7 @@ import ec.edu.ucuenca.ieps.negocio.clientes.PersonaNaturalFacade;
 import ec.edu.ucuenca.ieps.negocio.clientes.TipoPersonaFacade;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -23,6 +25,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.event.FlowEvent;
 
 @Named("personaNaturalController")
 @SessionScoped
@@ -59,6 +62,10 @@ public class PersonaNaturalController implements Serializable {
     private PersonaNaturalFacade getFacade() {
         return ejbFacade;
     }
+    
+    public String onFlowProcess(FlowEvent event) {
+            return event.getNewStep();
+    }
 
     public PersonaNatural prepareCreate() {
         selected = new PersonaNatural();
@@ -84,6 +91,9 @@ public class PersonaNaturalController implements Serializable {
                                                 selected.getPrimerNombre()+" "+
                                                 selected.getSegundoNombre()
                                                 );
+        
+        Gson gson = new Gson();
+        System.out.println(gson.toJson(selected.getPersona()));
         this.ejbFacadePersona.create(selected.getPersona());
         selected.setCodigoPersona(selected.getPersona().getCodigo());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle1").getString("PersonaNaturalCreated"));

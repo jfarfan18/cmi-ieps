@@ -10,9 +10,9 @@
 
         <p:dialog id="PersonaJuridicaCreateDlg" widgetVar="PersonaJuridicaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{propiedadesEtiquetas.CrearNuevaPersonaJuridica}">
             <h:form id="PersonaJuridicaCreateForm">
-                <p:growl id="mensaje" showDetail="true" sticky="true" /> 
+                <p:growl id="mensaje" showDetail="true" sticky="true" autoUpdate="true"/> 
                 <h:panelGroup id="display" >
-                    <p:wizard flowListener="#{personaController.onFlowProcess}" style="width: 500px;">
+                    <p:wizard flowListener="#{personaJuridicaController.onFlowProcess}" style="width: 500px;"  backLabel="#{propiedadesEtiquetas.Atras}" nextLabel="#{propiedadesEtiquetas.Siguiente}">
 
                         <p:tab id="basico" title="Datos Basicos">
                             <h:panelGrid columns="2" rendered="#{personaJuridicaController.selected != null}">
@@ -75,7 +75,7 @@
                             <p:contextMenu for="tblRepresentantes">
                                 <p:menuitem value="#{propiedadesEtiquetas.Quitar}" update="tblRepresentantes" icon="ui-icon-close" actionListener="#{personaJuridicaController.quitarRepresentante}"/>
                             </p:contextMenu>
-                            <p:commandButton actionListener="#{propiedadesEtiquetas.propiedadesEtiquetas}" value="#{propiedadesEtiquetas.Save}" update="display,:PersonaJuridicaListForm:datalist,:growl" oncomplete="handleSubmit(args,'PersonaJuridicaCreateDialog');"/>
+                            <p:commandButton actionListener="#{personaJuridicaController.create}" value="#{propiedadesEtiquetas.Save}" update="display,:PersonaJuridicaListForm:datalist,:growl" oncomplete="handleSubmit(args,'PersonaJuridicaCreateDialog');"/>
                             <p:commandButton value="#{propiedadesEtiquetas.Cancel}" onclick="PersonaJuridicaCreateDialog.hide()"/>
                         </p:tab>
 

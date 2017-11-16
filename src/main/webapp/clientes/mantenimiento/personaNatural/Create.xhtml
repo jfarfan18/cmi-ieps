@@ -10,9 +10,9 @@
 
         <p:dialog id="PersonaNaturalCreateDlg" widgetVar="PersonaNaturalCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{propiedadesEtiquetas.CrearNuevaPersonaNatural}">
             <h:form id="PersonaNaturalCreateForm">
-                 <p:growl id="mensaje" showDetail="true" sticky="true" />  
+                <p:growl id="mensaje" showDetail="true" sticky="true" autoUpdate="true"/>  
                 <h:panelGroup id="display">
-                   <p:wizard flowListener="#{personaController.onFlowProcess}">
+                   <p:wizard flowListener="#{personaNaturalController.onFlowProcess}"  backLabel="#{propiedadesEtiquetas.Atras}" nextLabel="#{propiedadesEtiquetas.Siguiente}">
 
                         <p:tab id="basico" title="Datos Basicos">
                             <p:panelGrid columns="2" rendered="#{personaNaturalController.selected != null}">

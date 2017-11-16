@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -34,6 +36,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Cliente.findByFechaIngreso", query = "SELECT c FROM Cliente c WHERE c.fechaIngreso = :fechaIngreso"),
     @NamedQuery(name = "Cliente.findByFechaActualizacion", query = "SELECT c FROM Cliente c WHERE c.fechaActualizacion = :fechaActualizacion")})
 public class Cliente implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "CODIGO")
+    private Integer codigo;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -80,10 +88,24 @@ public class Cliente implements Serializable {
         this.codigoPersona = codigoPersona;
     }
 
+    
+    
+    public Cliente(Integer codigo) {
+        this.codigo = codigo;
+    }
+
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (fechaIngreso != null ? fechaIngreso.hashCode() : 0);
+        hash += (codigo != null ? codigo.hashCode() : 0);
         return hash;
     }
 
@@ -94,7 +116,7 @@ public class Cliente implements Serializable {
             return false;
         }
         Cliente other = (Cliente) object;
-        if ((this.fechaIngreso == null && other.fechaIngreso != null) || (this.fechaIngreso != null && !this.fechaIngreso.equals(other.fechaIngreso))) {
+        if ((this.codigo == null && other.codigo != null) || (this.codigo != null && !this.codigo.equals(other.codigo))) {
             return false;
         }
         return true;
@@ -102,7 +124,7 @@ public class Cliente implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.edu.ucuenca.ieps.modelado.Cliente[ fechaIngreso=" + fechaIngreso + " ]";
+        return "ec.edu.ucuenca.ieps.modelado.clientes.Cliente[ codigo=" + codigo + " ]";
     }
     
 }

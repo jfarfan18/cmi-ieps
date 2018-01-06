@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EstrategiaglobalCreateDlg" widgetVar="EstrategiaglobalCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="NUEVA ESTRATEGIA GLOBAL">
+            <h:form id="EstrategiaglobalCreateForm">
+                <h:panelGroup id="display">
+                    <h:panelGrid columns="1" rendered="#{estrategiaglobalController.selected != null}">
+                        <p:outputLabel value="Estrategia " for="estrategia" />
+                        <p:inputTextarea cols="100" 
+                                         id="estrategia" 
+                                         value="#{estrategiaglobalController.selected.estrategia}" 
+                                         title="Estrategia" 
+                                         required="true" 
+                                         requiredMessage="Estategia Valor Requerido"/>
+                    </h:panelGrid>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             icon="ui-icon-disk"
+                                             actionListener="#{estrategiaglobalController.create}" title="Guardar" update="display,:EstrategiaglobalListForm:datalist,:growl" oncomplete="handleSubmit(args,'EstrategiaglobalCreateDialog');"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             icon="ui-icon-close"
+                                             title="Cancelar" onclick="EstrategiaglobalCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

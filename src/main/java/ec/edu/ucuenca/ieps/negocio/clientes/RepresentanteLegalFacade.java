@@ -6,6 +6,7 @@
 package ec.edu.ucuenca.ieps.negocio.clientes;
 
 import ec.edu.ucuenca.ieps.modelado.clientes.RepresentanteLegal;
+import ec.edu.ucuenca.ieps.negocio.AbstractFacade;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

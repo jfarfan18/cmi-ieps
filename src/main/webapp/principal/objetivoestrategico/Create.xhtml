@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ObjetivoestrategicoCreateDlg" 
+                  widgetVar="ObjetivoestrategicoCreateDialog" 
+                  modal="true" 
+                  resizable="false" 
+                  appendTo="@(body)" 
+                  header="NUEVO OBJETIVO ESTRATEGICO">
+            <h:form id="ObjetivoestrategicoCreateForm">
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                <h:panelGroup id="display">
+                    <h:panelGrid columns="6" rendered="#{objetivoestrategicoController.selected != null}">
+                        <p:outputLabel value="Nombre" for="nombre" />
+                        <p:inputText id="nombre" 
+                                     size="45"
+                                     value="#{objetivoestrategicoController.selected.nombre}" 
+                                     title="#{bundle.CreateObjetivoestrategicoTitle_nombre}" />
+                        <p:outputLabel value="Estrategia Global " for="idEstrategiaGlobal" />
+                        <p:selectOneMenu id="idEstrategiaGlobal"
+                                         value="#{objetivoestrategicoController.selected.idEstrategiaGlobal}" >
+                            <f:selectItems value="#{estrategiaglobalController.itemsAvailableSelectOne}"
+                                           var="idEstrategiaGlobalItem"
+                                           itemValue="#{idEstrategiaGlobalItem}"
+                                           itemLabel="#{idEstrategiaGlobalItem.idEstrategiaGlobal}"
+                                           itemDescription="#{idEstrategiaGlobalItem.estrategia}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Perspectiva" 
+                                       style="width: 500px"
+                                       for="idPerspectiva" />
+                        <p:selectOneMenu id="idPerspectiva" 
+                                         value="#{objetivoestrategicoController.selected.idPerspectiva}" >
+                            <f:selectItems value="#{perspectivaController.itemsAvailableSelectOne}"
+                                           var="idPerspectivaItem"
+                                           itemValue="#{idPerspectivaItem}"
+                                           itemLabel="#{idPerspectivaItem.nombre}"/>
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2">
+                        <h:panelGrid columns="2">
+                            <f:facet name="header">
+                                <h:outputText value="META"/>
+                                <p:separator/>
+                            </f:facet>
+                            <p:outputLabel value="Meta" for="meta" />
+                            <p:inputText  
+                                id="meta"
+                                size="45"
+                                value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.meta}" 
+                                title="Meta" />
+                            <p:outputLabel value="Definicion " for="definicion" />
+                            <p:inputText  
+                                id="definicion"
+                                size="45"
+                                value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.definicion}" 
+                                title="Definicion" />
+                            <p:outputLabel value="Aclaracion " for="aclaracion" />
+                            <p:inputTextarea  
+                                id="aclaracion"
+                                cols="47"
+                                rows="2"
+                                value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.aclaracion}" 
+                                title="Aclaracion" />
+                            <p:outputLabel value="Conceptualizacion " for="conceptualizacion" />
+                            <p:inputTextarea  
+                                id="conceptualizacion"
+                                cols="47"
+                                rows="2"
+                                value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.conceptualizacion}" 
+                                title="Conceptualizacion" />
+                            <p:outputLabel value="Responsable " for="idPersonaResponsable" />
+                            <p:selectOneMenu id="idPersonaResponsable" value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.idPersonaResponsable}" >
+                                <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                               var="idPersonaResponsableItem"
+                                               itemValue="#{idPersonaResponsableItem}"
+                                               itemLabel ="#{idPersonaResponsableItem.idCargo.nombre}:#{idPersonaResponsableItem.nombre}"/>
+                            </p:selectOneMenu>
+                            <p:spacer height="20"/>
+                        </h:panelGrid>
+
+
+                        <h:panelGrid columns="1">
+                            <f:facet name="header">
+                                <h:outputText value="INDICADOR"/>
+                                <p:separator/>
+                            </f:facet>
+                            <h:panelGrid columns="4">
+                                <p:outputLabel value="Nombre" for="nombreIndicador" />
+                                <p:inputText  
+                                    id="nombreIndicador"
+                                    size="45"
+                                    value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.nombre}" 
+                                    title="Nombre" />
+                                <p:outputLabel value="Formula " for="formula" />
+                                <p:inputText  
+                                    id="formula"
+                                    size="45"
+                                    value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.formula}" 
+                                    title="Formula" >
+                                    <p:ajax event="blur" update="componentesTbl" listener="#{objetivoestrategicoController.obtieneComponentes()}" />
+                                </p:inputText>
+                                <p:outputLabel value="Unidades " for="unidades" />
+                                <p:inputText  
+                                    id="unidades"
+                                    size="45"
+                                    value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.unidades}" 
+                                    title="Unidades" />
+                                <p:outputLabel value="Periodicidad " for="periodicidad" />
+                                <p:inputText 
+                                    id="periodicidad"
+                                    size="45"
+                                    value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.tiempoMedicion}" 
+                                    title="Periodicidad de Medicion" />
+                                <p:outputLabel value="KPI " for="kpi" />
+                                <p:inputTextarea  
+                                    id="kpi"
+                                    cols="47"
+                                    rows="2"
+                                    value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.kpi}" 
+                                    title="KPI" />
+                                <p:outputLabel value="Glosario  " for="glosario" />
+                                <p:inputTextarea  
+                                    id="glosario"
+                                    cols="47"
+                                    rows="2"
+                                    value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.glosario}" 
+                                    title="Glosario" />
+                            </h:panelGrid>
+                            <h:panelGrid columns="3">
+                                <h:panelGrid columns="2">
+                                    <p:outputLabel value="Valor Base " for="valorBase" />
+                                    <p:inputText  
+                                        id="valorBase"
+                                        size="10"
+                                        value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.base}" 
+                                        title="Valor Base" />
+                                    <p:outputLabel value="Valor Meta " for="valorMeta" />
+                                    <p:inputText  
+                                        id="valorMeta"
+                                        size="10"
+                                        value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.meta}" 
+                                        title="Valor Meta" />
+                                </h:panelGrid>
+                                <h:panelGrid columns="5">
+                                    <h:outputLabel>
+                                        <p:graphicImage value ="/resources/images/verde.png"/>
+                                    </h:outputLabel>
+                                    <p:outputLabel value="&gt;=" for="verdeMayor" />
+                                    <p:inputText  
+                                        id="verdeMayor"
+                                        size="5"
+                                        value="#{objetivoestrategicoController.verde.limiteInferior}" 
+                                        title="Limite Inferior" />
+                                    <p:outputLabel value="&lt;=" for="verdeMenor" />
+                                    <p:inputText  
+                                        id="verdeMenor"
+                                        size="5"
+                                        value="#{objetivoestrategicoController.verde.limiteSuperior}" 
+                                        title="Limite Superior" />                        
+
+                                    <h:outputLabel>
+                                        <p:graphicImage value ="/resources/images/naranja.png"/>
+                                    </h:outputLabel>
+                                    <p:outputLabel value="&gt;=" for="naranjaMayor" />
+                                    <p:inputText  
+                                        id="naranjaMayor"
+                                        size="5"
+                                        value="#{objetivoestrategicoController.naranja.limiteInferior}" 
+                                        title="Limite Inferior" />
+                                    <p:outputLabel value="&lt;=" for="naranjaMenor" />
+                                    <p:inputText  
+                                        id="naranjaMenor"
+                                        size="5"
+                                        value="#{objetivoestrategicoController.naranja.limiteSuperior}" 
+                                        title="Limite Superior" />
+
+
+                                    <h:outputLabel>
+                                        <p:graphicImage value ="/resources/images/rojo.png"/>
+                                    </h:outputLabel>
+                                    <p:outputLabel value="&gt;=" for="rojoMayor" />
+                                    <p:inputText  
+                                        id="rojoMayor"
+                                        size="5"
+                                        value="#{objetivoestrategicoController.rojo.limiteInferior}" 
+                                        title="Limite Inferior" />
+                                    <p:outputLabel value="&lt;=" for="rojoMenor" />
+                                    <p:inputText  
+                                        id="rojoMenor"
+                                        size="5"
+                                        value="#{objetivoestrategicoController.rojo.limiteSuperior}" 
+                                        title="Limite Superior" />
+                                </h:panelGrid>
+                                <h:panelGrid columns="1">
+                                    <p:dataTable id="componentesTbl" style="width: 400px" var="car" value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.componenteformlaCollection}" editable="true" editMode="cell" widgetVar="cellCars">
+                                        <f:facet name="header">
+                                            COMPONENTES FORMULA
+                                        </f:facet>
+                                        <p:column headerText="Descripcion">                                            
+                                                <h:outputText value="#{car.descripcion}" />                                           
+                                        </p:column>
+
+                                        <p:ajax event="cellEdit"  />
+
+                                        <p:column headerText="Unidades">
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{car.unidad}" /></f:facet>
+                                                <f:facet name="input"><p:inputText id="modelInput" value="#{car.unidad}" style="width:96%"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+
+
+                                    </p:dataTable>
+                                </h:panelGrid>
+                            </h:panelGrid>
+                        </h:panelGrid>
+                        <p:commandButton style="height: 75px;
+                                         width: 75px;
+                                         background-image: url(../img/fondo-boton.png);
+                                         background-size: 75px;
+                                         border-radius: 50px;
+                                         color:#ffffff"
+                                         icon="ui-icon-plus"
+                                         title="Agregar" 
+                                         action ="#{objetivoestrategicoController.agregarIndicador()}"
+                                         update="componentesTbl,metasTbl,meta, definicion,aclaracion,conceptualizacion,nombreIndicador,formula,unidades,periodicidad,kpi,glosario,valorBase,valorMeta,verdeMayor, verdeMenor, naranjaMayor,naranjaMenor,rojoMayor,rojoMenor"/>
+                    </h:panelGrid>
+
+                    <p:contextMenu for="metasTbl">
+                        <p:menuitem value="Editar" 
+                                    icon="ui-icon-pencil" 
+                                    action="#{objetivoestrategicoController.editarIndicador()}"
+                                    update="componentesTbl,idPersonaResponsable,metasTbl,meta, definicion,aclaracion,conceptualizacion,nombreIndicador,formula,unidades,periodicidad,kpi,glosario,valorBase,valorMeta,verdeMayor, verdeMenor, naranjaMayor,naranjaMenor,rojoMayor,rojoMenor"/>
+                        <p:menuitem value="Eliminar" 
+                                    action="#{objetivoestrategicoController.eliminarIndicador()}"
+                                    update="idPersonaResponsable,metasTbl,meta, definicion,aclaracion,conceptualizacion,nombreIndicador,formula,unidades,periodicidad,kpi,glosario,valorBase,valorMeta,verdeMayor, verdeMenor, naranjaMayor,naranjaMenor,rojoMayor,rojoMenor"/>
+                    </p:contextMenu>
+                    <p:dataTable id="metasTbl" 
+                                 style="width: 1300px"
+                                 var="meta" 
+                                 value="#{objetivoestrategicoController.selected.objetivoestrategicoindicadorCollection}" 
+                                 selectionMode="single"
+                                 selection="#{objetivoestrategicoController.metaSeleccionada}"
+                                 rowKey="#{meta.objetivoestrategicoindicadorPK}">
+                        <f:facet name="header">
+                            METAS-INDICADORES
+                        </f:facet>
+                        <p:column headerText="META">
+                            <p:inputTextarea style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.meta}" />
+                        </p:column>
+                        <p:column headerText="DEFINICION">
+                            <p:inputTextarea style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.definicion}" />
+                        </p:column>
+                        <p:column headerText="ACLARACION">
+                            <p:inputTextarea style="border: 0" readonly="true" cols="18" rows="3" value="#{meta.aclaracion}" />
+                        </p:column>
+                        <p:column headerText="CONCPTUALIZACION">
+                            <p:inputTextarea style="border: 0" readonly="true" cols="18" rows="3" value="#{meta.conceptualizacion}" />
+                        </p:column>
+                        <p:column headerText="INDICADOR">
+                            <p:inputTextarea style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.indicador.nombre}" />
+                        </p:column>
+                        <p:column headerText="FORMULA">
+                            <p:inputTextarea style="border: 0" readonly="true" cols="18" rows="3" value="#{meta.indicador.formula}" />
+                        </p:column>
+                        <p:column headerText="UNIDADES">
+                            <p:inputTextarea  style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.indicador.unidades}" />
+                        </p:column>
+                        <p:column headerText="KPI">
+                            <p:inputTextarea  style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.indicador.kpi}" />
+                        </p:column>
+                    </p:dataTable>
+                    <p:commandButton style="height: 75px;
+                                     width: 75px;
+                                     background-image: url(../img/fondo-boton.png);
+                                     background-size: 75px;
+                                     border-radius: 50px;
+                                     color:#ffffff"
+                                     icon="ui-icon-disk"
+                                     actionListener="#{objetivoestrategicoController.create}" title="Guardar" update="display,:ObjetivoestrategicoListForm:datalist,:growl" oncomplete="handleSubmit(args,'ObjetivoestrategicoCreateDialog');"/>
+                    <p:commandButton style="height: 75px;
+                                     width: 75px;
+                                     background-image: url(../img/fondo-boton.png);
+                                     background-size: 75px;
+                                     border-radius: 50px;
+                                     color:#ffffff"
+                                     icon="ui-icon-close"
+                                     title="Cancelar" onclick="ObjetivoestrategicoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

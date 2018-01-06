@@ -5,6 +5,10 @@
  */
 package ec.edu.ucuenca.ieps.modelado.seguridades;
 
+import ec.edu.ucuenca.ieps.modelado.clientes.Persona;
+import ec.edu.ucuenca.ieps.modelado.principal.Actividad;
+import ec.edu.ucuenca.ieps.modelado.principal.Estado;
+import ec.edu.ucuenca.ieps.modelado.principal.Indicador;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -44,6 +48,17 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuario.findByFechaActualizacionContrasena", query = "SELECT u FROM Usuario u WHERE u.fechaActualizacionContrasena = :fechaActualizacionContrasena"),
     @NamedQuery(name = "Usuario.findByFechaCreacion", query = "SELECT u FROM Usuario u WHERE u.fechaCreacion = :fechaCreacion")})
 public class Usuario implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuarioResponsable", fetch = FetchType.LAZY)
+    private List<Actividad> actividadList;
+    @OneToMany(mappedBy = "idUsuarioResponsable", fetch = FetchType.LAZY)
+    private List<Indicador> indicadorList;
+    @JoinColumn(name = "CODIGO_ESTADO", referencedColumnName = "CODIGO")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Estado codigoEstado;
+    @JoinColumn(name = "CODIGO_PERSONA", referencedColumnName = "CODIGO")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Persona codigoPersona;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -167,6 +182,40 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "ec.edu.ucuenca.ieps.modelado.seguridades.Usuario[ codigo=" + codigo + " ]";
+    }
+
+    @XmlTransient
+    public List<Actividad> getActividadList() {
+        return actividadList;
+    }
+
+    public void setActividadList(List<Actividad> actividadList) {
+        this.actividadList = actividadList;
+    }
+
+    @XmlTransient
+    public List<Indicador> getIndicadorList() {
+        return indicadorList;
+    }
+
+    public void setIndicadorList(List<Indicador> indicadorList) {
+        this.indicadorList = indicadorList;
+    }
+
+    public Estado getCodigoEstado() {
+        return codigoEstado;
+    }
+
+    public void setCodigoEstado(Estado codigoEstado) {
+        this.codigoEstado = codigoEstado;
+    }
+
+    public Persona getCodigoPersona() {
+        return codigoPersona;
+    }
+
+    public void setCodigoPersona(Persona codigoPersona) {
+        this.codigoPersona = codigoPersona;
     }
     
 }

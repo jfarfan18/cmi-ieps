@@ -6,6 +6,7 @@
 package ec.edu.ucuenca.ieps.negocio.clientes;
 
 import ec.edu.ucuenca.ieps.modelado.clientes.EstadoCivil;
+import ec.edu.ucuenca.ieps.negocio.AbstractFacade;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

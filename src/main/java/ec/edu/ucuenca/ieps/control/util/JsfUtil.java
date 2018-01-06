@@ -1,4 +1,4 @@
-package ec.edu.ucuenca.ieps.control.clientes.util;
+package ec.edu.ucuenca.ieps.control.util;
 
 import java.util.List;
 import javax.faces.application.FacesMessage;

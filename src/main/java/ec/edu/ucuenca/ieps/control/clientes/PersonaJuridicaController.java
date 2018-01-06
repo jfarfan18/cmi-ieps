@@ -1,8 +1,8 @@
 package ec.edu.ucuenca.ieps.control.clientes;
 
 import ec.edu.ucuenca.ieps.modelado.clientes.PersonaJuridica;
-import ec.edu.ucuenca.ieps.control.clientes.util.JsfUtil;
-import ec.edu.ucuenca.ieps.control.clientes.util.JsfUtil.PersistAction;
+import ec.edu.ucuenca.ieps.control.util.JsfUtil;
+import ec.edu.ucuenca.ieps.control.util.JsfUtil.PersistAction;
 import ec.edu.ucuenca.ieps.modelado.clientes.Persona;
 import ec.edu.ucuenca.ieps.modelado.clientes.RepresentanteLegal;
 import ec.edu.ucuenca.ieps.modelado.clientes.TipoPersona;

@@ -22,22 +22,22 @@
         <div>
             <center>
                 <h:form>
-            <p:panel id="panelPrincipal" style="text-align: center " >  
-                <p:messages id="mensaje" showDetail="true" autoUpdate="true" closable="true" /> 
-                
-                    <h:panelGrid columns="5" width="100%">
-                        <f:facet name="header">
-                            <h:outputLabel value="#{propiedadesEtiquetaBL.SeleccioneModulo}"
-                                           styleClass="encabezadosPanelGrid"/>
-                        </f:facet>
-                        
-                        <p:dataGrid id="datalist" 
+                    <p:panel id="panelPrincipal" style="align-content: center " >  
+                        <p:messages id="mensaje" showDetail="true" autoUpdate="true" closable="true" /> 
+
+                        <h:panelGrid columns="5" width="100%">
+                            <f:facet name="header">
+                                <h:outputLabel value="#{propiedadesEtiquetaBL.SeleccioneModulo}hhjjh"
+                                               styleClass="encabezadosPanelGrid"/>
+                            </f:facet>
+
+                            <p:dataGrid id="datalist" 
                                         value="#{menuController.modulos}" 
                                         var="item" 
                                         columns="3"  
                                         rows="6" paginator="true"  
                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
-                                        style=" width: 60%"
+                                        style=" width: 60%; margin: 0 auto"
                                         >      
 
                                 <f:facet name="header">
@@ -59,10 +59,10 @@
                                 </p:panel>  
 
                             </p:dataGrid>
-                    </h:panelGrid>
-                
-            </p:panel>
-                    </h:form>
+                        </h:panelGrid>
+
+                    </p:panel>
+                </h:form>
             </center>
         </div>
         <br />

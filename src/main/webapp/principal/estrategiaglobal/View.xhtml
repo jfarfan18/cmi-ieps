@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EstrategiaglobalViewDlg" 
+                  widgetVar="EstrategiaglobalViewDialog" 
+                  modal="true" resizable="false" 
+                  appendTo="@(body)" 
+                  header="ESTRATEGIA GLOBAL">
+            <h:form id="EstrategiaglobalViewForm">
+                <h:panelGroup id="display">
+                    <h:panelGrid columns="2" rendered="#{estrategiaglobalController.selected != null}">
+                        <h:outputText value="Codigo"/>
+                        <h:outputText value="#{estrategiaglobalController.selected.idEstrategiaGlobal}" title="#{bundle.ViewEstrategiaglobalTitle_idEstrategiaGlobal}"/>
+                        <h:outputText value="#{bundle.ViewEstrategiaglobalLabel_estrategia}"/>
+                        <h:inputTextarea readonly="true" cols="100" value="#{estrategiaglobalController.selected.estrategia}" title="#{bundle.ViewEstrategiaglobalTitle_estrategia}"/>
+                    </h:panelGrid>
+
+
+                    <p:dataTable id="metasTibl" 
+                                 style="width: 1200px"
+                                 var="obj" 
+                                 value="#{estrategiaglobalController.selected.objetivoestrategicoCollection}" 
+                                 >
+                       
+                        <f:facet name="header">
+                            OBJETIVOS ESTRATEGICOS
+                        </f:facet>
+                        <p:column style="width:16px">
+                            <p:rowToggler />
+                        </p:column>
+
+                        <p:column headerText="ID">
+                            <p:inputTextarea style="border: 0" readonly="true" cols="18" rows="1" value="#{obj.idObjetivoEstrategico}" />
+                        </p:column>
+                        <p:column headerText="DEFINICION">
+                            <p:inputTextarea style="border: 0" readonly="true" cols="18" rows="1" value="#{obj.nombre}" />
+                        </p:column>
+
+                        <p:rowExpansion>
+                            <h:panelGrid columns="1">
+                                <p:dataTable var="meta" 
+                                             value="#{obj.objetivoestrategicoindicadorCollection}" id="metasTibl2" > 
+
+                                    <p:column headerText="META">
+                                        <p:inputTextarea style="border: 0" readonly="true" cols="15" rows="1" value="#{meta.meta}" />
+                                    </p:column>
+                                    <p:column headerText="DEFINICION">
+                                        <p:inputTextarea style="border: 0" readonly="true" cols="15" rows="1" value="#{meta.definicion}" />
+                                    </p:column>
+                                    <p:column headerText="ACLARACION">
+                                        <p:inputTextarea style="border: 0" readonly="true" cols="15" rows="3" value="#{meta.aclaracion}" />
+                                    </p:column>
+                                    <p:column headerText="CONCPTUALIZACION">
+                                        <p:inputTextarea style="border: 0" readonly="true" cols="15" rows="3" value="#{meta.conceptualizacion}" />
+                                    </p:column>
+                                    <p:column headerText="INDICADOR">
+                                        <p:inputTextarea style="border: 0" readonly="true" cols="15" rows="1" value="#{meta.indicador.nombre}" />
+                                    </p:column>
+                                    <p:column headerText="FORMULA">
+                                        <p:inputTextarea style="border: 0" readonly="true" cols="15" rows="3" value="#{meta.indicador.formula}" />
+                                    </p:column>
+                                    <p:column headerText="UNIDADES">
+                                        <p:inputTextarea  style="border: 0" readonly="true" cols="15" rows="1" value="#{meta.indicador.unidades}" />
+                                    </p:column>
+                                    <p:column style="width:80px;text-align: center">
+                                        <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             update=":IndocadorForm:historialTbl,:IndocadorForm:indicador,:IndocadorForm:periodicidad,:IndocadorForm:formula,:IndocadorForm:unidades,:IndocadorForm:base,:IndocadorForm:meta,:IndocadorForm:glosario,:IndocadorForm:historialTbl,:IndocadorForm:grafico" 
+                                                         oncomplete="PF('IndicadorDialog').show()" icon="ui-icon-pencil" title="Evaluar">
+                                            <f:setPropertyActionListener value="#{meta}" target="#{objetivoestrategicoController.metaSeleccionada}" />
+                                        </p:commandButton>
+                                    </p:column>
+                                </p:dataTable>
+                            </h:panelGrid>
+                        </p:rowExpansion>
+
+                    </p:dataTable>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             icon="ui-icon-close" 
+                                             title="Cerrar" onclick="EstrategiaglobalViewDialog.hide()"/>
+                      <h3>Export Page Data Only</h3>
+                   
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

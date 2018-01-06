@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ActividadEditDlg" 
+                  widgetVar="ActividadEditDialog" 
+                  modal="true" 
+                  resizable="false" 
+                  appendTo="@(body)" 
+                  header="EDITAR ACTIVIDAD">
+            <h:form id="ActividadEditForm">
+                <h:panelGroup id="display">
+                    <h:panelGrid columns="4" rendered="#{actividadController.selected != null}">
+                        
+                        <p:outputLabel value="Nombre " for="nombre" />
+                        <p:inputText id="nombre" 
+                                     value="#{actividadController.selected.nombre}" 
+                                     title="Nombre" />
+                        <p:outputLabel value="Control " for="control" />
+                        <p:inputText id="control" 
+                                     value="#{actividadController.selected.control}" 
+                                     title="Control" />
+                        
+                        <p:outputLabel value="Avance " for="avance" />
+                        <p:inputText id="avance" 
+                                     value="#{actividadController.selected.avance}" 
+                                     title="Avance" />
+                        <p:outputLabel value="Objetivo Estrategico " for="idObjetivoEstrategico" />
+                        <p:selectOneMenu id="idObjetivoEstrategico" 
+                                         style="width: 200px"
+                                         value="#{actividadController.selected.idObjetivoEstrategico}" 
+                                         required="true" 
+                                         requiredMessage="Objetivo Estrategico Requerido">
+                            <f:selectItems value="#{objetivoestrategicoController.itemsAvailableSelectOne}"
+                                           var="idObjetivoEstrategicoItem"
+                                           itemValue="#{idObjetivoEstrategicoItem}"
+                                           itemLabel="#{idObjetivoEstrategicoItem.nombre}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Responsable " for="idPersonaResponsable" />
+                        <p:selectOneMenu id="idPersonaResponsable" 
+                                         style="width: 200px"
+                                         value="#{actividadController.selected.idPersonaResponsable}" 
+                                         required="true" 
+                                         requiredMessage="Responsable Requerido">
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="idPersonaResponsableItem"
+                                           itemValue="#{idPersonaResponsableItem}"
+                                           itemLabel="#{idPersonaResponsableItem.idCargo.nombre}:#{idPersonaResponsableItem.nombre}"/>
+                        </p:selectOneMenu>
+                        <p:spacer/>
+                        <p:spacer/>
+                        <p:outputLabel value="Fecha Inicio" for="fechaInicio" />
+                        <p:calendar id="fechaInicio" 
+                                    pattern="dd/MM/yyyy" 
+                                    value="#{actividadController.selected.fechaInicio}" 
+                                    title="Fecha Inicio"  showOn="button"/>
+                        <p:outputLabel value="Fecha Fin " for="fechaFin" />
+                        <p:calendar id="fechaFin" 
+                                    pattern="dd/MM/yyyy" 
+                                    value="#{actividadController.selected.fechaFin}" 
+                                    title="Fecha Fin "  
+                                    showOn="button"/>
+                    </h:panelGrid>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             icon="ui-icon-disk"
+                                             actionListener="#{actividadController.update}" title="Guardar" update="display,:ActividadListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ActividadEditDialog');"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             icon="ui-icon-close"
+                                             title="Cancelar" onclick="ActividadEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

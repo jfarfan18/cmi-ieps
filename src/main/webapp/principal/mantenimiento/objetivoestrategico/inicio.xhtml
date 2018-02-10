@@ -61,10 +61,10 @@
                         <p:rowExpansion>
                             <h:panelGrid columns="1">
                                 <p:dataTable var="meta" 
-                                             value="#{item.objetivoestrategicoindicadorCollection}" 
+                                             value="#{item.objetivoEstrategicoIndicadorList}" 
                                              selectionMode="single"
                                              selection="#{objetivoestrategicoController.metaSeleccionada}"
-                                             rowKey="#{meta.objetivoestrategicoindicadorPK}">
+                                             rowKey="#{meta.objetivoEstrategicoIndicadorPK}">
                                     <p:column headerText="META">
                                         <p:inputTextarea style="border: 0" readonly="true" cols="15" rows="1" value="#{meta.meta}" />
                                     </p:column>

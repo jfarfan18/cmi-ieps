@@ -53,34 +53,34 @@
                             <h:inputText readonly="true"   
                                          id="meta"
                                          size="45"
-                                         value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.meta}" 
+                                         value="#{objetivoestrategicoController.nuevoObjetivoEstrategicoIndicador.meta}" 
                                          title="Meta" />
                             <p:outputLabel value="Definicion " for="definicion" />
                             <h:inputText readonly="true"   
                                          id="definicion"
                                          size="45"
-                                         value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.definicion}" 
+                                         value="#{objetivoestrategicoController.nuevoObjetivoEstrategicoIndicador.definicion}" 
                                          title="Definicion" />
                             <p:outputLabel value="Aclaracion " for="aclaracion" />
                             <p:inputTextarea readonly="true"  
                                              id="aclaracion"
                                              cols="47"
                                              rows="2"
-                                             value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.aclaracion}" 
+                                             value="#{objetivoestrategicoController.nuevoObjetivoEstrategicoIndicador.aclaracion}" 
                                              title="Aclaracion" />
                             <p:outputLabel value="Conceptualizacion " for="conceptualizacion" />
                             <p:inputTextarea readonly="true"
                                              id="conceptualizacion"
                                              cols="47"
                                              rows="2"
-                                             value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.conceptualizacion}" 
+                                             value="#{objetivoestrategicoController.nuevoObjetivoEstrategicoIndicador.conceptualizacion}" 
                                              title="Conceptualizacion" />
                             <p:outputLabel value="Responsable " for="idPersonaResponsable" />
-                            <p:selectOneMenu id="idPersonaResponsable" value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.idPersonaResponsable}" >
-                                <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                            <p:selectOneMenu id="idPersonaResponsable" value="#{objetivoestrategicoController.nuevoObjetivoEstrategicoIndicador.indicador.idUsuarioResponsable}" >
+                                <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
                                                var="idPersonaResponsableItem"
                                                itemValue="#{idPersonaResponsableItem}"
-                                               itemLabel ="#{idPersonaResponsableItem.idCargo.nombre}:#{idPersonaResponsableItem.nombre}"/>
+                                               itemLabel ="#{idPersonaResponsableItem.nombre}:#{idPersonaResponsableItem.nombre}"/>
                             </p:selectOneMenu>
                             <p:spacer height="20"/>
                         </h:panelGrid>
@@ -96,39 +96,39 @@
                                 <h:inputText readonly="true"   
                                              id="nombreIndicador"
                                              size="45"
-                                             value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.nombre}" 
+                                             value="#{objetivoestrategicoController.nuevoObjetivoEstrategicoIndicador.indicador.nombre}" 
                                              title="Nombre" />
                                 <p:outputLabel value="Formula " for="formula" />
                                 <h:inputText readonly="true"   
                                              id="formula"
                                              size="45"
-                                             value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.formula}" 
+                                             value="#{objetivoestrategicoController.nuevoObjetivoEstrategicoIndicador.indicador.formula}" 
                                              title="Formula" />
                                 <p:outputLabel value="Unidades " for="unidades" />
                                 <h:inputText readonly="true"   
                                              id="unidades"
                                              size="45"
-                                             value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.unidades}" 
+                                             value="#{objetivoestrategicoController.nuevoObjetivoEstrategicoIndicador.indicador.unidades}" 
                                              title="Unidades" />
                                 <p:outputLabel value="Periodicidad " for="periodicidad" />
                                 <h:inputText readonly="true"  
                                              id="periodicidad"
                                              size="45"
-                                             value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.tiempoMedicion}" 
+                                             value="#{objetivoestrategicoController.nuevoObjetivoEstrategicoIndicador.indicador.tiempoMedicion}" 
                                              title="Periodicidad de Medicion" />
                                 <p:outputLabel value="KPI " for="kpi" />
                                 <p:inputTextarea readonly="true"  
                                                  id="kpi"
                                                  cols="47"
                                                  rows="2"
-                                                 value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.kpi}" 
+                                                 value="#{objetivoestrategicoController.nuevoObjetivoEstrategicoIndicador.indicador.kpi}" 
                                                  title="KPI" />
                                 <p:outputLabel value="Glosario  " for="glosario" />
                                 <p:inputTextarea readonly="true"  
                                                  id="glosario"
                                                  cols="47"
                                                  rows="2"
-                                                 value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.glosario}" 
+                                                 value="#{objetivoestrategicoController.nuevoObjetivoEstrategicoIndicador.indicador.glosario}" 
                                                  title="Glosario" />
                             </h:panelGrid>
                             <h:panelGrid columns="3">
@@ -137,13 +137,13 @@
                                     <h:inputText readonly="true"   
                                                  id="valorBase"
                                                  size="10"
-                                                 value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.base}" 
+                                                 value="#{objetivoestrategicoController.nuevoObjetivoEstrategicoIndicador.indicador.base}" 
                                                  title="Valor Base" />
                                     <p:outputLabel value="Valor Meta " for="valorMeta" />
                                     <h:inputText readonly="true"   
                                                  id="valorMeta"
                                                  size="10"
-                                                 value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.meta}" 
+                                                 value="#{objetivoestrategicoController.nuevoObjetivoEstrategicoIndicador.indicador.meta}" 
                                                  title="Valor Meta" />
                                 </h:panelGrid>
                                 <h:panelGrid columns="5">
@@ -197,7 +197,7 @@
                                                  title="Limite Superior" />
                                 </h:panelGrid>
                                 <h:panelGrid columns="1">
-                                    <p:dataTable id="componentesTbl" style="width: 400px" var="comVer" value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.componenteformlaCollection}" editable="true" editMode="cell" widgetVar="cellComVer">
+                                    <p:dataTable id="componentesTbl" style="width: 400px" var="comVer" value="#{objetivoestrategicoController.nuevoObjetivoEstrategicoIndicador.indicador.componenteFormlaList}" editable="true" editMode="cell" widgetVar="cellComVer">
                                         <f:facet name="header">
                                             COMPONENTES FORMULA
                                         </f:facet>
@@ -228,10 +228,10 @@
                     <p:dataTable id="metasTbl" 
                                  style="width: 1300px"
                                  var="meta" 
-                                 value="#{objetivoestrategicoController.selected.objetivoestrategicoindicadorCollection}" 
+                                 value="#{objetivoestrategicoController.selected.objetivoEstrategicoIndicadorList}" 
                                  selectionMode="single"
-                                 selection="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador}"
-                                 rowKey="#{meta.objetivoestrategicoindicadorPK}">
+                                 selection="#{objetivoestrategicoController.nuevoObjetivoEstrategicoIndicador}"
+                                 rowKey="#{meta.objetivoEstrategicoIndicadorPK}">
                         <f:facet name="header">
                             METAS-INDICADORES
                         </f:facet>

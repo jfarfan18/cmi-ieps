@@ -77,10 +77,10 @@
                                 title="Conceptualizacion" />
                             <p:outputLabel value="Responsable " for="idUsuarioResponsable" />
                             <p:selectOneMenu id="idUsuarioResponsable" value="#{objetivoestrategicoController.nuevoObjetivoEstrategicoIndicador.indicador.idUsuarioResponsable}" >
-                                <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
                                                var="idUsuarioResponsableItem"
                                                itemValue="#{idUsuarioResponsableItem}"
-                                               itemLabel ="#{idUsuarioResponsableItem.idCargo.nombre}:#{idUsuarioResponsableItem.nombre}"/>
+                                               itemLabel ="#{idUsuarioResponsableItem.codigoPersona.nombreCompleto}:#{idUsuarioResponsableItem.nombre}"/>
                             </p:selectOneMenu>
                             <p:spacer height="20"/>
                         </h:panelGrid>
@@ -199,7 +199,7 @@
                                         title="Limite Superior" />
                                 </h:panelGrid>
                                 <h:panelGrid columns="1">
-                                    <p:dataTable id="componentesTbl" style="width: 400px" var="car" value="#{objetivoestrategicoController.nuevoObjetivoEstrategicoIndicador.indicador.componenteformlaCollection}" editable="true" editMode="cell" widgetVar="cellCars">
+                                    <p:dataTable id="componentesTbl" style="width: 400px" var="car" value="#{objetivoestrategicoController.nuevoObjetivoEstrategicoIndicador.indicador.componenteFormlaList}" editable="true" editMode="cell" widgetVar="cellCars">
                                         <f:facet name="header">
                                             COMPONENTES FORMULA
                                         </f:facet>
@@ -245,7 +245,7 @@
                     <p:dataTable id="metasTbl" 
                                  style="width: 1300px"
                                  var="meta" 
-                                 value="#{objetivoestrategicoController.selected.objetivoestrategicoindicadorCollection}" 
+                                 value="#{objetivoestrategicoController.selected.objetivoEstrategicoIndicadorList}" 
                                  selectionMode="single"
                                  selection="#{objetivoestrategicoController.metaSeleccionada}"
                                  rowKey="#{meta.objetivoestrategicoindicadorPK}">

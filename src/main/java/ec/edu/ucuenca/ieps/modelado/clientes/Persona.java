@@ -52,14 +52,6 @@ import javax.xml.bind.annotation.XmlTransient;
 })
 public class Persona implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoPersona", fetch = FetchType.LAZY)
-    private List<Socio> socioList;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoPersona", fetch = FetchType.LAZY)
-    private List<Usuario> usuarioList;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoPersonaRepresentante", fetch = FetchType.LAZY)
-    private List<RepresentanteLegal> representanteLegalList;
     public static final String findByIdentificacion="Persona.findByIdentificacion";
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "persona", fetch = FetchType.LAZY)
     private PersonaJuridica personaJuridica;
@@ -235,31 +227,4 @@ public class Persona implements Serializable {
         this.personaNatural = personaNatural;
     }
 
-    @XmlTransient
-    public List<RepresentanteLegal> getRepresentanteLegalList() {
-        return representanteLegalList;
-    }
-
-    public void setRepresentanteLegalList(List<RepresentanteLegal> representanteLegalList) {
-        this.representanteLegalList = representanteLegalList;
-    }
-
-    @XmlTransient
-    public List<Usuario> getUsuarioList() {
-        return usuarioList;
-    }
-
-    public void setUsuarioList(List<Usuario> usuarioList) {
-        this.usuarioList = usuarioList;
-    }
-
-    @XmlTransient
-    public List<Socio> getSocioList() {
-        return socioList;
-    }
-
-    public void setSocioList(List<Socio> socioList) {
-        this.socioList = socioList;
-    }
-    
 }

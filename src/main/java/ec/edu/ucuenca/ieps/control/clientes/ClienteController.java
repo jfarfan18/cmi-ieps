@@ -151,11 +151,12 @@ public class ClienteController implements Serializable {
                 this.updatePersonaJuridica();
             }
         }else{
-            if (this.persona.getCodigoTipoPersona().getCodigo().intValue()==1){
-                this.personaNatural.setPersona(new Persona());
+            if (this.persona.getCodigoTipoPersona().getCodigo().equals(1)){
+                System.err.println("Asigna persona");
+                this.personaNatural.setPersona(this.persona);
                 this.createPersonaNatural();
             }else if (this.persona.getCodigoTipoPersona().getCodigo().intValue()==2){
-                this.personaJuridica.setPersona(new Persona());
+                this.personaJuridica.setPersona(this.persona);
                 this.createPersonaJuridica();
             }
         }
@@ -189,6 +190,8 @@ public class ClienteController implements Serializable {
                                                 this.personaNatural.getPrimerNombre()+" "+
                                                 this.personaNatural.getSegundoNombre()
                                                 );
+        Gson gson = new Gson();
+        System.out.println(gson.toJson(this.personaNatural.getPersona()));
         this.ejbFacadePersona.create(this.personaNatural.getPersona());
         this.personaNatural.setCodigoPersona(this.personaNatural.getPersona().getCodigo());
         this.ejbFacadePersonaNatural.create(personaNatural);

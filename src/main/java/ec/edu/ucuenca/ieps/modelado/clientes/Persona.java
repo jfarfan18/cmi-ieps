@@ -5,6 +5,7 @@
  */
 package ec.edu.ucuenca.ieps.modelado.clientes;
 
+import ec.edu.ucuenca.ieps.modelado.organizacion.Socio;
 import ec.edu.ucuenca.ieps.modelado.seguridades.Usuario;
 import java.io.Serializable;
 import java.util.Date;
@@ -50,6 +51,9 @@ import javax.xml.bind.annotation.XmlTransient;
 ///personalizadas
 })
 public class Persona implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoPersona", fetch = FetchType.LAZY)
+    private List<Socio> socioList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoPersona", fetch = FetchType.LAZY)
     private List<Usuario> usuarioList;
@@ -247,6 +251,15 @@ public class Persona implements Serializable {
 
     public void setUsuarioList(List<Usuario> usuarioList) {
         this.usuarioList = usuarioList;
+    }
+
+    @XmlTransient
+    public List<Socio> getSocioList() {
+        return socioList;
+    }
+
+    public void setSocioList(List<Socio> socioList) {
+        this.socioList = socioList;
     }
     
 }

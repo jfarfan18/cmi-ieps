@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ContratoProductoEditDlg" widgetVar="ContratoProductoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditContratoProductoTitle}">
+            <h:form id="ContratoProductoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{contratoProductoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditContratoProductoLabel_codigo}" for="codigo" />
+                        <p:inputText id="codigo" value="#{contratoProductoController.selected.codigo}" title="#{bundle.EditContratoProductoTitle_codigo}" required="true" requiredMessage="#{bundle.EditContratoProductoRequiredMessage_codigo}"/>
+                        <p:outputLabel value="#{bundle.EditContratoProductoLabel_eliminado}" for="eliminado" />
+                        <p:inputText id="eliminado" value="#{contratoProductoController.selected.eliminado}" title="#{bundle.EditContratoProductoTitle_eliminado}" />
+                        <p:outputLabel value="#{bundle.EditContratoProductoLabel_codigoContrato}" for="codigoContrato" />
+                        <p:selectOneMenu id="codigoContrato" value="#{contratoProductoController.selected.codigoContrato}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{contratoController.itemsAvailableSelectOne}"
+                                           var="codigoContratoItem"
+                                           itemValue="#{codigoContratoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditContratoProductoLabel_codigoProducto}" for="codigoProducto" />
+                        <p:selectOneMenu id="codigoProducto" value="#{contratoProductoController.selected.codigoProducto}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{productoController.itemsAvailableSelectOne}"
+                                           var="codigoProductoItem"
+                                           itemValue="#{codigoProductoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{contratoProductoController.update}" value="#{bundle.Save}" update="display,:ContratoProductoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ContratoProductoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ContratoProductoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

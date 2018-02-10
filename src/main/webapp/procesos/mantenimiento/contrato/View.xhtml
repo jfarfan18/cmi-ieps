@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ContratoViewDlg" widgetVar="ContratoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewContratoTitle}">
+            <h:form id="ContratoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{contratoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewContratoLabel_codigo}"/>
+                        <h:outputText value="#{contratoController.selected.codigo}" title="#{bundle.ViewContratoTitle_codigo}"/>
+                        <h:outputText value="#{bundle.ViewContratoLabel_fechaInicio}"/>
+                        <h:outputText value="#{contratoController.selected.fechaInicio}" title="#{bundle.ViewContratoTitle_fechaInicio}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewContratoLabel_fechaFin}"/>
+                        <h:outputText value="#{contratoController.selected.fechaFin}" title="#{bundle.ViewContratoTitle_fechaFin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewContratoLabel_precioDiaro}"/>
+                        <h:outputText value="#{contratoController.selected.precioDiaro}" title="#{bundle.ViewContratoTitle_precioDiaro}"/>
+                        <h:outputText value="#{bundle.ViewContratoLabel_precioMensual}"/>
+                        <h:outputText value="#{contratoController.selected.precioMensual}" title="#{bundle.ViewContratoTitle_precioMensual}"/>
+                        <h:outputText value="#{bundle.ViewContratoLabel_codigoSocio}"/>
+                        <h:outputText value="#{contratoController.selected.codigoSocio}" title="#{bundle.ViewContratoTitle_codigoSocio}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ContratoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

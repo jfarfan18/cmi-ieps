@@ -5,6 +5,8 @@
  */
 package ec.edu.ucuenca.ieps.modelado.organizacion;
 
+import ec.edu.ucuenca.ieps.modelado.clientes.Persona;
+import ec.edu.ucuenca.ieps.modelado.procesos.Contrato;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +18,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -39,6 +43,12 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Socio.findByFechaIngreso", query = "SELECT s FROM Socio s WHERE s.fechaIngreso = :fechaIngreso"),
     @NamedQuery(name = "Socio.findByCodigo", query = "SELECT s FROM Socio s WHERE s.codigo = :codigo")})
 public class Socio implements Serializable {
+
+    @JoinColumn(name = "CODIGO_PERSONA", referencedColumnName = "CODIGO")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Persona codigoPersona;
+    @OneToMany(mappedBy = "codigoSocio", fetch = FetchType.LAZY)
+    private List<Contrato> contratoList;
 
     private static final long serialVersionUID = 1L;
     @Size(max = 1)
@@ -129,6 +139,23 @@ public class Socio implements Serializable {
     @Override
     public String toString() {
         return "ec.edu.ucuenca.ieps.modelado.organizacion.Socio[ codigo=" + codigo + " ]";
+    }
+
+    public Persona getCodigoPersona() {
+        return codigoPersona;
+    }
+
+    public void setCodigoPersona(Persona codigoPersona) {
+        this.codigoPersona = codigoPersona;
+    }
+
+    @XmlTransient
+    public List<Contrato> getContratoList() {
+        return contratoList;
+    }
+
+    public void setContratoList(List<Contrato> contratoList) {
+        this.contratoList = contratoList;
     }
     
 }

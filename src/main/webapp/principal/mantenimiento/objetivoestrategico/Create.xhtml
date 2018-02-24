@@ -248,7 +248,7 @@
                                  value="#{objetivoestrategicoController.selected.objetivoEstrategicoIndicadorList}" 
                                  selectionMode="single"
                                  selection="#{objetivoestrategicoController.metaSeleccionada}"
-                                 rowKey="#{meta.objetivoestrategicoindicadorPK}">
+                                 rowKey="#{meta.objetivoEstrategicoIndicadorPK}">
                         <f:facet name="header">
                             METAS-INDICADORES
                         </f:facet>
@@ -284,7 +284,7 @@
                                      border-radius: 50px;
                                      color:#ffffff"
                                      icon="ui-icon-disk"
-                                     actionListener="#{objetivoestrategicoController.create}" title="Guardar" update="display,:ObjetivoestrategicoListForm:datalist,:growl" oncomplete="handleSubmit(args,'ObjetivoestrategicoCreateDialog');"/>
+                                     actionListener="#{objetivoestrategicoController.create}" title="Guardar" update="display,:ObjetivoestrategicoListForm:datalist" oncomplete="handleSubmit(args,'ObjetivoestrategicoCreateDialog');"/>
                     <p:commandButton style="height: 75px;
                                      width: 75px;
                                      background-image: url(../img/fondo-boton.png);

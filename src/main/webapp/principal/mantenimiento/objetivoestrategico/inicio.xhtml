@@ -15,7 +15,7 @@
 
         <ui:define name="body">
             <h:form id="ObjetivoestrategicoListForm">                
-                <p:growl id="growl" showDetail="true" sticky="true" />
+                <p:growl  showDetail="true" sticky="true" autoUpdate="true" />
                 <p:panel header="OBJETIVOS ESTRATEGICOS">
                     <p:dataTable id="datalist" 
                                  value="#{objetivoestrategicoController.items}" 
@@ -94,7 +94,7 @@
                                                          border-radius: 50px;
                                                          color:#ffffff"
                                                          action ="#{objetivoestrategicoController.evaluar()}"
-                                                         update="" 
+                                                         update=":IndocadorForm" 
                                                          icon="ui-icon-pencil" title="Evaluar">
                                             <f:setPropertyActionListener value="#{meta}" target="#{objetivoestrategicoController.metaSeleccionada}" />
                                         </p:commandButton>
@@ -130,7 +130,7 @@
                                              background-size: 75px;
                                              border-radius: 50px;
                                              color:#ffffff"
-                                             id="deleteButton" icon="ui-icon-trash"  title="Eliminar" actionListener="#{objetivoestrategicoController.destroy}" update=":growl,datalist" disabled="#{empty objetivoestrategicoController.selected}"/>
+                                             id="deleteButton" icon="ui-icon-trash"  title="Eliminar" actionListener="#{objetivoestrategicoController.destroy}" update="datalist" disabled="#{empty objetivoestrategicoController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
@@ -139,6 +139,7 @@
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
+            <ui:include src="Evaluar.xhtml"/>
         </ui:define>
     </ui:composition>
 

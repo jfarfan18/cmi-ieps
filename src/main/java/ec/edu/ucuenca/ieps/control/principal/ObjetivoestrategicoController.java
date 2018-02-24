@@ -42,6 +42,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.context.RequestContext;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.DateAxis;
 import org.primefaces.model.chart.LineChartModel;
@@ -57,6 +58,8 @@ public class ObjetivoestrategicoController implements Serializable {
     private ObjetivoestrategicoFacade ejbFacade;
     @EJB
     private SemaforoFacade ejbFacadeSemaforo;
+    
+    private RequestContext context;
 
     public ObjetivoestrategicoindicadorFacade getEjbFacade1() {
         return ejbFacade1;
@@ -133,11 +136,13 @@ public void generarReporte()
             itemsdetalle.add(det);
         }
         System.out.println("cargo");
-        try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/BSC/faces/objetivoestrategico/Evaluar.xhtml");
-        } catch (IOException ex) {
-            Logger.getLogger(ObjetivoestrategicoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //try {
+            //FacesContext.getCurrentInstance().getExternalContext().redirect("/cmi/faces/principal/mantenimiento/objetivoestrategico/Evaluar.xhtml");
+            context = RequestContext.getCurrentInstance();
+            context.execute("PF('EvaluarDialog').show()");
+        //} catch (Exception ex) {
+          //  Logger.getLogger(ObjetivoestrategicoController.class.getName()).log(Level.SEVERE, null, ex);
+        //}
     }
  public void evaluarInd() {
         System.out.println("cargo");
